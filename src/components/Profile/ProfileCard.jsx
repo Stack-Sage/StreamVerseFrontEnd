@@ -1,22 +1,27 @@
-'use client'
-import React, { useContext, useState } from 'react'
-import { UserContext } from "../../context/UserContext.js"
-import { FaCamera } from "react-icons/fa"
+"use client";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../../context/UserContext.js";
+import { FaCamera } from "react-icons/fa";
+import {
+  updateAccountApi,
+  updateAvatarApi,
+  changePasswordApi,
+} from "@/services/user.service.js";
+import { showError, showInfo, showSuccess } from "../ui/toast.js";
 
 const ProfileCard = () => {
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext);
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [updatePassword, setUpdatedPassword] = useState({
+    oldPassword: "",
+    newPassword: "",
+  });
 
-  const [edit, setEdit] = useState(false)
-
-  const [form, setForm] = useState({
-    username: user?.username || "",
-    email: user?.email || "",
+  const [editFields, setEditFields] = useState({
     fullName: user?.fullName || "",
-    createdAt: user?.createdAt || "",
-    updatedAt: user?.upatedAt || "",
-    avatar: user?.avatar || "",
-    coverImage: user?.coverImage || "",
-  })
+    email: user?.email || "",
+  });
 
   const [settings, setSettings] = useState({
     emailFollow: true,
@@ -25,129 +30,128 @@ const ProfileCard = () => {
     launches: false,
     updates: true,
     newsletter: true,
-  })
+  });
 
-  // Handle input change
-  const handleChange = e => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
+  const handlePasswordChange = (e) => {
+    setUpdatedPassword((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-  // Handle settings toggle
-  const handleToggle = key => {
-    setSettings(s => ({ ...s, [key]: !s[key] }))
-  }
+  const savePassword = async (e) => {
+    if (updatePassword.newPassword === updatePassword.oldPassword) {
+      showError("New Password must be different");
+      return;
+    }
 
-  // Handle save
-  const handleSave = () => {
-    setUser({ ...user, ...form })
-    setEdit(false)
-  }
+    e.preventDefault();
+    try {
+      const response = await changePasswordApi(updatePassword);
+      if (response && response.success) {
+        showSuccess(response.message);
+        setUpdatedPassword({ oldPassword: "", newPassword: "" });
+        setShowPasswordForm(false);
+      }
+    } catch (error) {
+      showError(error?.response?.data?.message || "Failed to Update ");
+    }
+  };
+
+  const changeAvatar = async (e) => {
+    const file = e.target.files[0];
+
+    try {
+      showInfo("Uploading Image...");
+      const response = await updateAvatarApi(file);
+
+      if (response && response.data) {
+        setUser(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data));
+        showSuccess(response.message);
+      }
+    } catch (error) {
+      showError(error?.response?.data?.message || "Failed to Update ");
+    }
+  };
+
+  const handleChange = async (e) => {
+    setEditFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const handletoggle = async (e) => {};
+
+  const handleSave = async (e) => {
+    try {
+      console.log(editFields);
+      const response = await updateAccountApi(editFields);
+      if (response && response.data) {
+        console.log(response);
+        setUser(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data));
+        showSuccess(response.message);
+        setEdit(false);
+      }
+    } catch (error) {
+      showError(error?.response?.data?.message || "Failed to Update");
+    }
+  };
 
   return (
-  <div className=" px-4 pb-20 opacity-100  ">
-     
-      <div className=" justify-center flex  rounded-2xl overflow-hidden   shadow-lg  ">
-       {form.coverImage &&(
-        <div className=' w-full h-full absolute  not-dark:invert '>
-
-          <img
-            src={form.coverImage || ""}
-            alt="Cover"
-            className="object-cover w-screen h-full  -z-0 opacity-30 not-dark:hue-rotate-180 "
-          />
-        </div>
-       ) }
-
-    
-        {edit && (
-          <label className="absolute top-4 right-4 bg-[#e3eafe] dark:bg-[#23235b] p-2 rounded-full cursor-pointer shadow  ">
-            <FaCamera className="text-[#7b2ff2] dark:text-[#7b2ff2]" />
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={e => {
-                const file = e.target.files[0]
-                if (file) {
-                  const url = URL.createObjectURL(file)
-                  setForm(f => ({ ...f, cover: url }))
-                }
-              }}
-            />
-          </label>
-        )}
-      </div>
-
-      {/* Profile Card */}
-      <div className="max-w-4xl mx-auto mt-30  bg-white dark:bg-[#23235b] rounded-2xl shadow-xl opacity-90 backdrop-opacity-35 flex flex-col md:flex-row items-center p-8 gap-8">
-        {/* Avatar */}
+    <div className=" px-4 pb-20 opacity-100  ">
+      <div
+        className="max-w-4xl mx-auto mt-30 bg-gradient-to-br from-indigo-300/40 via-blue-200/30 to-indigo-200/40 
+dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30 rounded-2xl shadow-lg opacity-90 backdrop-opacity-35 flex flex-col md:flex-row items-center p-8 gap-8"
+      >
         <div className="relative">
           <img
-            src={form.avatar || "/default-avatar.jpg"}
+            src={
+              user?.avatar ||
+              "https://img.favpng.com/6/14/19/computer-icons-user-profile-icon-design-png-favpng-vcvaCZNwnpxfkKNYzX3fYz7h2.jpg"
+            }
             alt="Avatar"
             className="w-32 h-32 rounded-full border-4 border-[#e3eafe] dark:border-[#7b2ff2] object-cover shadow"
           />
           {edit && (
-            <label className="absolute bottom-2 right-2 bg-[#e3eafe] dark:bg-[#23235b] p-2 rounded-full cursor-pointer shadow">
-              <FaCamera className="text-[#7b2ff2] dark:text-[#7b2ff2]" />
+            <label className="absolute bottom-2 right-2  bg-[#e3eafe] dark:bg-[#23235b] p-2 rounded-full cursor-pointer shadow">
+              <FaCamera className="text-[#9553ff] dark:text-[#8336ff]" />
               <input
                 type="file"
                 accept="image/*"
                 className="hidden"
-                onChange={e => {
-                  const file = e.target.files[0]
-                  if (file) {
-                    const url = URL.createObjectURL(file)
-                    setForm(f => ({ ...f, avatar: url }))
-                  }
-                }}
+                onChange={changeAvatar}
               />
             </label>
           )}
         </div>
 
         {/* Info */}
-        <div className="flex-1 flex flex-col opacity-80 backdrop-opacity-40 gap-2">
+        <div className="flex-1 flex flex-col gap-2">
           {edit ? (
             <>
               <input
-                name="username"
-                value={form.username}
+                name="fullName"
+                value={editFields.fullName}
                 onChange={handleChange}
-                className="font-bold text-2xl bg-[#e3eafe] dark:bg-[#23235b] text-[#23235b] dark:text-white rounded px-3 py-1 mb-2"
-                placeholder="Username"
+                className="font-bold text-xl bg-transparent ring-1 text-center w-fit text-[#23235b] dark:text-white rounded px-3 py-1 mb-2  "
+                placeholder="Enter New FullName"
               />
-              <input
-                name="bio"
-                value={form.bio}
-                onChange={handleChange}
-                className="bg-[#e3eafe] dark:bg-[#23235b] text-[#23235b] dark:text-white rounded px-3 py-1 mb-2"
-                placeholder="Bio"
-              />
+
               <input
                 name="email"
-                value={form.email}
+                value={editFields.email}
                 onChange={handleChange}
-                className="bg-[#e3eafe] dark:bg-[#23235b] text-[#23235b] dark:text-white rounded px-3 py-1 mb-2"
-                placeholder="Email"
-              />
-              <input
-                name="location"
-                value={form.location}
-                onChange={handleChange}
-                className="bg-[#e3eafe] dark:bg-[#23235b] text-[#23235b] dark:text-white rounded px-3 py-1 mb-2"
-                placeholder="Location"
+                className="bg-transparent text-xl ring-1 w-fit text-center text-[#23235b] dark:text-white rounded px-3 py-1 mb-2"
+                placeholder="Enter new Email"
               />
             </>
           ) : (
             <>
-              <h2 className="font-bold text-2xl text-[#23235b] dark:text-white">{form.username}</h2>
-              <p className="text-[#7b2ff2] dark:text-[#b0b3c6]">{form.bio}</p>
-              <div className="text-[#23235b] dark:text-white text-sm">
-                <span className="font-semibold">Email:</span> {form.email}
-              </div>
-              <div className="text-[#23235b] dark:text-white text-sm">
-                <span className="font-semibold">Location:</span> {form.location}
+              <h2 className="font-bold text-xl text-[#23235b] w-fit text-center dark:text-white">
+                {user?.fullName.toUpperCase()}
+              </h2>
+
+              <div className="text-[#23235b] w-fit text-center dark:text-white text-xl">
+                <span className="font-semibold"></span> {user?.email}
               </div>
             </>
           )}
@@ -169,58 +173,176 @@ const ProfileCard = () => {
             )}
           </div>
         </div>
+        <div className="flex-col space-y-4 mr-10">
+          <div>Videos Watched: {user?.watchHistory?.length || 0}</div>
+          <div>Watch Time - 2 hours</div>
+          <div>Followers: {user?.followers?.length || 0}</div>
+          <div>Following: {user?.following?.length || 0}</div>
+          <div></div>
+        </div>
       </div>
 
-      {/* Settings */}
-      <div className="max-w-4xl mx-auto mt-8 opacity-80 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white dark:bg-[#23235b] rounded-2xl shadow p-6">
-          <h3 className="font-bold text-lg mb-4 text-[#23235b] dark:text-white">Profile Information</h3>
-          <p className="mb-4 text-[#23235b] dark:text-[#b0b3c6]">{form.bio || "Add your bio here."}</p>
-          <div className="mb-2 text-[#23235b] dark:text-white"><span className="font-semibold">Full Name:</span> {form.username}</div>
-          <div className="mb-2 text-[#23235b] dark:text-white"><span className="font-semibold">Email:</span> {form.email}</div>
-          <div className="mb-2 text-[#23235b] dark:text-white"><span className="font-semibold">Location:</span> {form.location}</div>
-          <div className="mb-2 text-[#23235b] dark:text-white"><span className="font-semibold">Social:</span>
-            <span className="ml-2"> {/* Add social icons/links here if needed */}</span>
+      <div className="max-w-4xl mx-auto mt-8 opacity-80 grid grid-cols-1 space-x-6 md:grid-cols-2 gap-6">
+        <div
+          className="bg-gradient-to-br from-indigo-300/40 via-blue-200/30 to-indigo-100/40 
+dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30  rounded-2xl space-y-6 shadow p-6"
+        >
+          <h3 className=" flex flex-row font-bold text-lg mb-4 text-[#23235b] dark:text-white">
+            Profile Detials__{" "}
+            <p className="text-[#0013a6] italic font-normal text-xl hover:text-blue-900 ">
+              {" "}
+              @{user?.username}
+            </p>
+          </h3>
+
+          <div className="mb-4 text-[#23235b]  dark:text-white">
+            <span className="font-semibold">Full Name:</span> {user?.fullName}
           </div>
+          <div className="mb-4 text-[#23235b] dark:text-white">
+            <span className="font-semibold">Email:</span> {user?.email}
+          </div>
+          <div className="mb-4 text-[#23235b] dark:text-white">
+            <span className="font-semibold">Account Created on : </span>{" "}
+            {user?.createdAt
+              ? new Date(user.createdAt).toLocaleDateString()
+              : ""}
+          </div>
+          <div className="mb-4 text-[#23235b] dark:text-white">
+            <span className="font-semibold ">Last Updated on : </span>
+            {user?.updatedAt
+              ? new Date(user.updatedAt).toLocaleDateString()
+              : ""}
+          </div>
+
+          {showPasswordForm === true ? (
+            <>
+              <form
+                onSubmit={savePassword}
+                className="mt-6 flex flex-col gap-2"
+              >
+                <label htmlFor="oldPassword" className="font-semibold">
+                  Old Password
+                </label>
+                <input
+                  type="password"
+                  name="oldPassword"
+                  id="oldPassword"
+                  value={updatePassword.oldPassword}
+                  onChange={handlePasswordChange}
+                  className="bg-[#e3eafe] dark:bg-[#23235b] text-[#23235b] dark:text-white rounded px-3 py-1 mb-2"
+                  placeholder="Enter old password"
+                  required
+                />
+                <label htmlFor="newPassword" className="font-semibold">
+                  New Password
+                </label>
+                <input
+                  type="password"
+                  name="newPassword"
+                  id="newPassword"
+                  value={updatePassword.newPassword}
+                  onChange={handlePasswordChange}
+                  className="bg-[#e3eafe] dark:bg-[#23235b] text-[#23235b] dark:text-white rounded px-3 py-1 mb-2"
+                  placeholder="Enter new password"
+                  required
+                />
+
+                <button
+                  type="submit"
+                  className="bg-[#30007e] text-white px-4 py-2 rounded-xl font-bold shadow hover:bg-[#5b1fd1] transition"
+                >
+                  Update Password
+                </button>
+              </form>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => setShowPasswordForm(true)}
+                className="py-2 mt-4 px-4 hover:bg-violet-700  bg-[#4307a3] rounded-2xl cursor-pointer"
+              >
+                Change Password
+              </button>
+            </>
+          )}
         </div>
 
-
-        <div className="bg-white dark:bg-[#23235b] rounded-2xl shadow p-6">
-          <h3 className="font-bold text-lg mb-4 text-[#23235b] dark:text-white">Platform Settings</h3>
-          <div className="mb-2 font-semibold text-[#23235b] dark:text-white">Account</div>
+        <div
+          className="bg-gradient-to-br from-indigo-300/40 via-blue-200/30 to-indigo-100/40 
+dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70 rounded-2xl  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30 shadow p-6"
+        >
+          <h3 className="font-bold text-lg mb-4 text-[#23235b] dark:text-white">
+            {" "}
+            Settings
+          </h3>
+          <div className="mb-2 font-semibold text-[#23235b] dark:text-white">
+            Account
+          </div>
           <div className="flex flex-col gap-2 mb-4">
             <label className="flex items-center gap-2">
-              <input type="checkbox" checked={settings.emailFollow} onChange={() => handleToggle("emailFollow")} className="accent-[#7b2ff2]" />
+              <input
+                type="checkbox"
+                checked={settings.emailFollow}
+                onChange={() => handleToggle("emailFollow")}
+                className="accent-[#7b2ff2]"
+              />
               Email me when someone follows me
             </label>
             <label className="flex items-center gap-2">
-              <input type="checkbox" checked={settings.emailAnswer} onChange={() => handleToggle("emailAnswer")} className="accent-[#7b2ff2]" />
+              <input
+                type="checkbox"
+                checked={settings.emailAnswer}
+                onChange={() => handleToggle("emailAnswer")}
+                className="accent-[#7b2ff2]"
+              />
               Email me when someone answers on my post
             </label>
             <label className="flex items-center gap-2">
-              <input type="checkbox" checked={settings.emailMention} onChange={() => handleToggle("emailMention")} className="accent-[#7b2ff2]" />
+              <input
+                type="checkbox"
+                checked={settings.emailMention}
+                onChange={() => handleToggle("emailMention")}
+                className="accent-[#7b2ff2]"
+              />
               Email me when someone mentions me
             </label>
           </div>
-          <div className="mb-2 font-semibold text-[#23235b] dark:text-white">Application</div>
+          <div className="mb-2 font-semibold text-[#23235b] dark:text-white">
+            Application
+          </div>
           <div className="flex flex-col gap-2">
             <label className="flex items-center gap-2">
-              <input type="checkbox" checked={settings.launches} onChange={() => handleToggle("launches")} className="accent-[#7b2ff2]" />
+              <input
+                type="checkbox"
+                checked={settings.launches}
+                onChange={() => handleToggle("launches")}
+                className="accent-[#7b2ff2]"
+              />
               New launches and projects
             </label>
             <label className="flex items-center gap-2">
-              <input type="checkbox" checked={settings.updates} onChange={() => handleToggle("updates")} className="accent-[#7b2ff2]" />
+              <input
+                type="checkbox"
+                checked={settings.updates}
+                onChange={() => handleToggle("updates")}
+                className="accent-[#7b2ff2]"
+              />
               Monthly product updates
             </label>
             <label className="flex items-center gap-2">
-              <input type="checkbox" checked={settings.newsletter} onChange={() => handleToggle("newsletter")} className="accent-[#7b2ff2]" />
+              <input
+                type="checkbox"
+                checked={settings.newsletter}
+                onChange={() => handleToggle("newsletter")}
+                className="accent-[#7b2ff2]"
+              />
               Subscribe to newsletter
             </label>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProfileCard
+export default ProfileCard;

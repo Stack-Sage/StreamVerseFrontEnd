@@ -16,11 +16,17 @@ import {
   FaCog,
   FaQuestionCircle,
 } from "react-icons/fa";
+
+import { buttonStyle } from "@/styles/globals";
 import { MdSubscriptions } from "react-icons/md";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggleButton";
 import { useState, useContext } from "react";
 import { GlobalContext } from "@/context/globalContext";
+import { UserContext } from "@/context/UserContext";
+import Button from "../Auth/AuthButton";
+import UniButton from "./UniButton";
+import { showError, showSuccess } from "./toast";
 // All routes for desktop sidebar
 const navLinks = [
   { href: "/", label: "Home", icon: <FaHome /> },
@@ -42,21 +48,39 @@ const mobileLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { collapsed, setCollapsed, user } = useContext(GlobalContext);
+  const { collapsed, setCollapsed } = useContext(GlobalContext);
+  const { logoutMethod } = useContext(UserContext);
+  const route = useRouter();
+
+  async function logout() {
+    const response = await logoutMethod();
+    if (response.success) {
+      showSuccess("Logout SuccessFully!");
+      route.push("/login");
+    } else {
+      showError("Failed to Logout");
+    }
+  }
 
   return (
     <>
-   
-      <aside
-        className={` hidden md:flex lg:flex lg:fixed  fixed top-0 left-0 h-screen bg-gradient-to-br 
-          from-white via-[#e3eafe] to-[#c7d2fe] dark:from-[#0b0a2b] dark:via-[#000000] dark:to-[#23235b]
-          shadow-2xl flex-col justify-between z-50 border-none transition-all duration-300  `}
+      <div
+        className={` hidden   hover:-hue-rotate-15 md:flex fixed top-0 left-0 h-screen  
+             border-b 
+    flex-col justify-between z-20
+    backdrop-blur-xl border-r mt-14
+    dark:border-white/10 shadow-lg ${
+          collapsed ? "w-5rem hover:w-16rem   " : "w-16rem"
+        } border-white/20 dark:border-2 dark:border-white shadow-lg  dark:shadow-blue-900/50 shadow-black/30  hover:shadow-xl  
+        flex-col justify-between z-50 border-none transition-all duration-300  `}
         aria-label="Sidebar Navigation"
-        style={{ minWidth: collapsed ? "6rem" : "18rem"  }}
+       
       >
         {/* Collapse Button */}
         <button
-          className={`absolute top-6  p-2 rounded-3xl bg-[#e3eafe] hover:bg-[#7b2ff2] text-[#23235b] dark:bg-[#23235b] dark:text-white dark:hover:bg-[#7b2ff2] transition-all ${collapsed? "right-8 ": "right-4"} `}
+          className={`absolute top-2 p-2 rounded-3xl  hover:bg-[#0054fb] text-[#000000] dark:bg-[#0063bf] cursor-pointer dark:text-black dark:hover:bg-[#00d9ff] transition-all duration-300 ${
+            collapsed ? "right-6 " : "right-4"
+          } `}
           onClick={() => setCollapsed((c) => !c)}
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
@@ -64,22 +88,27 @@ export default function Navbar() {
         </button>
 
         {/* Logo */}
-        <div className="flex flex-col items-center pt-8 pb-4">
-     
-      
-        </div>
+        <div className="flex flex-col items-center pt-16 pb-4"></div>
 
         {/* Nav Links */}
-        <nav className="flex-1 pt-4 flex flex-col gap-2 px-3" aria-label="Main Navigation">
+        <nav
+          className={` flex-1  bg-transparent lg:pt-0 md:pt-2 flex flex-col gap-2  text-center 
+          ${collapsed ? "px-3 w-fit" : " px-6"}  `}
+          aria-label="Main Navigation"
+        >
           {navLinks.map(({ href, label, icon }) => (
             <Link
               key={href}
               href={href}
-              className={`group flex items-center gap-4 px-4 py-2 rounded-2xl font-semibold transition-all relative
+              className={`group flex  items-center gap-4 px-2 py-2 rounded-2xl font-semibold transition-all relative   
+              
+              dark:from-indigo-700/50 dark:via-blue-800/60 dark:to-slate-900/70
+              dark:hover:from-indigo-600 dark:hover:via-blue-700 dark:hover:to-slate-800
+
                 ${
                   pathname === href
-                    ? "bg-[#dbeafe] text-[#23235b] shadow-lg dark:bg-[#221c3a] dark:text-white"
-                    : "text-[#23235b] hover:bg-[#e3eafe] hover:text-[#7b2ff2] dark:text-[#b0b3c6] dark:hover:bg-[#23235b] dark:hover:text-white"
+                    ? "bg-gradient-to-r from-indigo-400/60 via-blue-500/80 to-indigo-600/60 text-black hover:from-indigo-500/60 hover:via-blue-600/80 hover:to-indigo-700/90 transition-all duration-300 ease-in-out   dark:bg-[#221c3a]   dark:text-white"
+                    : " bg-gradient-to-r from-indigo-300/40 via-blue-500/30 to-indigo-600/20 text-black hover:from-indigo-500/90 hover:via-blue-600/80 hover:to-indigo-700/90  hover:text-[#000000] dark:text-[#b0b3c6] dark:hover:bg-[#23235b] dark:hover:text-white"
                 }`}
               aria-current={pathname === href ? "page" : undefined}
             >
@@ -92,7 +121,11 @@ export default function Navbar() {
               >
                 {icon}
               </span>
-              <span className={`${collapsed ? "hidden" : "block"} text-base font-bold`}>
+              <span
+                className={`${
+                  collapsed ? "hidden" : "block"
+                } text-base font-bold`}
+              >
                 {label}
               </span>
               {/* Tooltip for collapsed sidebar */}
@@ -131,7 +164,7 @@ export default function Navbar() {
                 <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#e3eafe] text-[#7b2ff2] dark:bg-[#23235b] dark:text-[#7b2ff2]">
                   <FaSignInAlt />
                 </span>
-                <span className="text-base font-bold">Sign In</span>
+                <span className="text-base font-bold">Log In</span>
               </Link>
               <Link
                 href="/register"
@@ -142,15 +175,29 @@ export default function Navbar() {
                 </span>
                 <span className="text-base font-bold">Sign Up</span>
               </Link>
+
+              <button
+                href="/login"
+                onClick={logout}
+                className="group flex cursor-pointer flex-row items-center text-center gap-4 px-5 py-3 rounded-2xl font-semibold transition-all text-[#23235b] hover:bg-[#e3eafe] hover:text-[#7b2ff2] dark:text-[#b0b3c6] dark:hover:bg-[#23235b] dark:hover:text-white"
+              >
+                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#e3eafe] text-[#7b2ff2] dark:bg-[#23235b] dark:text-[#7b2ff2]">
+                  <FaUserPlus />
+                </span>
+                Logout
+              </button>
             </>
           )}
         </nav>
-
-     
-      </aside>
+      </div>
 
       {/* Mobile Bottom Navbar */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full bg-[#e3eafe] dark:bg-[#181824] shadow-t flex justify-around items-center py-2 border-t border-[#c7d2fe] dark:border-[#23235b] z-50" aria-label="Mobile Navigation">
+      <nav
+        className="md:hidden fixed bottom-0 left-0 w-full  shadow-inner dark:shadow-blue-900/50 shadow-black/40 shadow-t flex justify-around items-center py-2 border-t  bg-gradient-to-tr from-indigo-400/70 hover:contrast-125 via-blue-400/100 to-indigo-300/90  dark:from-black/80 dark:via-slate-950 dark:to-black/80
+             backdrop-blur-[1px] 
+             border-b  border-[#c7d2fe] dark:border-[#23235b] z-50"
+        aria-label="Mobile Navigation"
+      >
         {mobileLinks.map(({ href, label, icon }) => (
           <Link
             key={href}

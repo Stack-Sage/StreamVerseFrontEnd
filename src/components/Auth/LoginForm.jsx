@@ -1,11 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
-import { loginUserApi } from "@/services/user.service";
+import { UserContext } from "@/context/UserContext";
 import { showError, showSuccess } from "../ui/toast";
+import { cardStyle } from "@/styles/globals";
 
 export default function LoginForm() {
+  const {loginMethod} = useContext(UserContext)
+
   const [loginType, setLoginType] = useState("username");
+
 
   const [message, setMessage] = useState("Login");
 
@@ -17,34 +21,29 @@ export default function LoginForm() {
     const userData = Object.fromEntries(formData.entries());
     try {
       setMessage("Please Wait!");
-      const response = await loginUserApi(userData)
-      // console.log('response is ',response)
-
-      if (response.success && response.data ) {
+      const response = await loginMethod(userData)
+    
+      if (response && response.data ) {
       
-        localStorage.setItem("user", JSON.stringify(response.data.user));
         setMessage("Logged in Successfully");
         showSuccess(response.message);
-        
-        console.log(localStorage.getItem("user"));
-        router.push("/");
+        router.push("/profile");
       } else {
-        showError(response?.message || "Failed");
+        console.log("error is ",error?.response?.data?.message)
+        showError(error?.response?.data?.message || "Failed no response");
       }
     } catch (error) {
       showError(error?.response?.data?.message || "Failed");
+    
     }
   };
 
   return (
     <div className=" flex min-w-md min-h-[93vh] items-center justify-center ">
       <form
-        className=" flex w-2/3
-         justify-center mb-10   lg:scale-110   mx-auto p-6 rounded-xl shadow-md
-          bg-gradient-to-br from-indigo-200 via-transparent to-indigo-100
-          dark:from-black dark:via-gray-900 dark:to-black
-          border border-indigo-100 dark:border-indigo-900
-          flex-col gap-4 font-sans transition-all duration-300"
+        className={` flex w-2/3 
+         justify-center mb-10  hover:contrast-125  mx-auto p-6 lg:p-10
+          flex-col gap-4 font-mono ${cardStyle}  `}
         autoComplete="off"
         onSubmit={handleSubmit}
       >

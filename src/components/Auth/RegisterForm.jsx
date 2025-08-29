@@ -4,6 +4,7 @@ import { registerUserApi } from "@/services/user.service";
 import React, { useState } from "react";
 import { showError, showSuccess } from "../ui/toast";
 import { data } from "autoprefixer";
+import { cardStyle } from "@/styles/globals";
 
 export default function RegisterForm() {
 
@@ -37,11 +38,8 @@ export default function RegisterForm() {
   return (
     <div className="flex min-h-[93vh] items-center justify-center">
       <form
-        className="w-full flex justify-center   max-w-md min-w-1/2 mx-auto p-6 rounded-xl shadow-md
-          bg-gradient-to-br from-indigo-200 via-transparent to-indigo-100
-          dark:from-black dark:via-gray-900 dark:to-black
-          border border-indigo-100 dark:border-indigo-900
-          flex-col gap-4 font-sans transition-all duration-300"
+        className={` w-full flex justify-center  hover:-hue-rotate-15 max-w-md min-w-1/2 mx-auto p-6 
+          flex-col gap-4 font-mono ${cardStyle} `}
         onSubmit = {handleSubmit}
         encType="multipart/form-data"
       >
@@ -115,18 +113,7 @@ export default function RegisterForm() {
           className="block w-full text-zinc-800 dark:text-zinc-200 font-mono rounded-full px-4 py-2 bg-inherit ring-1 ring-indigo-300 focus:ring-2 focus:ring-indigo-400 dark:ring-indigo-500 dark:focus:ring-indigo-500 shadow-md focus:shadow-lg"
         />
 
-        {/* Cover Image */}
-        <label className="font-bold text-black dark:text-white tracking-tight mb-1" htmlFor="coverImage">
-          Cover Image
-        </label>
-        <input
-          id="coverImage"
-          name="coverImage"
-          type="file"
-          accept="image/*"
-          className="block w-full text-zinc-800 dark:text-zinc-200 font-mono rounded-full px-4 py-2 bg-inherit ring-1 ring-indigo-300 focus:ring-2 focus:ring-indigo-400 dark:ring-indigo-500 dark:focus:ring-indigo-500 shadow-md focus:shadow-lg"
-        />
-
+        
         <button
           type="submit"
           className="mt-2 flex items-center justify-center gap-2 px-5 py-2 rounded-lg font-bold tracking-tight

@@ -1,3 +1,4 @@
+import { showInfo } from "@/components/ui/toast";
 import axios from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -31,6 +32,7 @@ const loginUserApi = async (userData) => {
         },
       }
     );
+ 
     return response.data;
   } catch (error) {
     throw error;
@@ -44,6 +46,7 @@ const logoutUserApi = async () => {
       {},
       { withCredentials: true }
     );
+
     return response.data;
   } catch (error) {
     throw error;
@@ -73,6 +76,7 @@ const updateAccountApi = async (data) => {
         headers: { "Content-Type": "application/json" },
       }
     );
+
     return response.data;
   } catch (error) {
     throw error;
@@ -81,6 +85,7 @@ const updateAccountApi = async (data) => {
 
 const updateAvatarApi = async (file) => {
   try {
+   
     const formData = new FormData();
     formData.append("avatar", file);
     const response = await axios.patch(
@@ -90,6 +95,7 @@ const updateAvatarApi = async (file) => {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       }
+      
     );
     return response.data;
   } catch (error) {

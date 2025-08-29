@@ -3,8 +3,8 @@ import ProfileCard from '../../components/Profile/ProfileCard.jsx'
 
 export default function ProfilePage() {
   return (
-    <main className="min-h-screen  ">
-      <div className=' top-0 lg:sticky md:sticky z-40 fixed  w-full '>
+    <main className="  ">
+      <div className=' fixed right-0 left-0 z-30 pb-14 '>
         <ProfileTop 
         navLinks={[
           {label:"Docs",href:'/docs'},
@@ -12,16 +12,17 @@ export default function ProfilePage() {
           {label:"contact",href:'/contact'},
         ]}
         showSearch = {false}
+       
         
         />
       </div>
-      <div>
-        <div className='lg:mt-0 md:mt-0 mt-2 z-0 not-lg:mx-10 '>
+   
+        <div className='pt-14  h-[100vh] z-0 not-lg:mx-10 hover:contrast-[1.01] '>
 
       <ProfileCard/>
         </div>
 
-      </div>
+
     </main>
   );
 }
