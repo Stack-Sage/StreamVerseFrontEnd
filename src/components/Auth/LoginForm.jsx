@@ -6,7 +6,7 @@ import { showError, showSuccess } from "../ui/toast";
 import { cardStyle } from "@/styles/globals";
 
 export default function LoginForm() {
-  const {loginMethod} = useContext(UserContext)
+  const {loginMethod,setIsLogged} = useContext(UserContext)
 
   const [loginType, setLoginType] = useState("username");
 
@@ -27,6 +27,8 @@ export default function LoginForm() {
       
         setMessage("Logged in Successfully");
         showSuccess(response.message);
+        setIsLogged(true)
+
         router.push("/profile");
       } else {
         console.log("error is ",error?.response?.data?.message)

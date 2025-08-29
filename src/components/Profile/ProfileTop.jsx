@@ -24,9 +24,8 @@ export default function ProfileTop({
     <header
       className={`fixed top-0 left-0 w-full flex 
              items-center justify-between px-4 md:px-6 h-14
-             bg-gradient-to-br from-blue-300/70 hover:contrast-125 via-indigo-300/100 to-blue-300/70  dark:from-black/80 dark:via-slate-950 dark:to-black/80 not-dark:invert not-dark:-hue-rotate-180
-             backdrop-blur-[1px] 
-            dark:border-slate-700/20 shadow-lg shadow-white/40 dark:shadow-blue-900/20 hover:brightness-90  
+             
+          
              
              transition-all duration-300 z-40  ${collapsed ? "h-16 " : "h-14 "}`}
     >
@@ -35,23 +34,21 @@ export default function ProfileTop({
           `}>
         {leftContent}
         
-        <span className={`md:text-2xl text-xl lg:text-3xl  font-bold tracking-tight ${collapsed ? "text-xl ml-0" : "ml-2"} text-white dark:text-white `}>
-          StreamVerse
-        </span>
+       
     
         
 
       
         </div>
      
-      <div className="flex-1 flex items-center justify-center gap-6">
+      <div className="flex-1 flex absolute  items-center justify-center gap-6">
        
-            <nav className="hidden md:flex items-center gap-6">
+            <nav className=" md:flex items-center gap-6 bg-indigo-100 py-2 px-3 rounded-full  ">
               {navLinks.map((link) => (
                 <a
                   key={link.label || link}
                   href={link.href || "#"}
-                  className="text-[#23235b] dark:text-[#b0b3c6] hover:text-[#7b2ff2] dark:hover:text-white text-sm font-medium transition"
+                  className="text-[#23235b]  dark:text-[#b0b3c6] hover:text-[#7b2ff2] dark:hover:text-white text-sm font-medium transition"
                 >
                   {link.label || link}
                   {(link.label || link) === "Roadmap" && <span className="ml-1">↗</span>}

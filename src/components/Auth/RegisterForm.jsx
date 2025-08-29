@@ -9,6 +9,7 @@ import { cardStyle } from "@/styles/globals";
 export default function RegisterForm() {
 
   const [message ,setMessage] = useState("Register")
+  
 
   const router = useRouter()
   const handleSubmit = async(e) =>{
@@ -22,7 +23,7 @@ export default function RegisterForm() {
       if(data){
         setMessage("Registered Successfully")
         showSuccess(data.message)
-      
+        
         router.push('/login')
         
       }

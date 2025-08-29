@@ -15,6 +15,8 @@ import {
   FaChevronLeft,
   FaCog,
   FaQuestionCircle,
+  FaToolbox,
+  FaTools,
 } from "react-icons/fa";
 
 import { buttonStyle } from "@/styles/globals";
@@ -27,11 +29,13 @@ import { UserContext } from "@/context/UserContext";
 import Button from "../Auth/AuthButton";
 import UniButton from "./UniButton";
 import { showError, showSuccess } from "./toast";
+import TopBar from "./TopBar";
+
 // All routes for desktop sidebar
 const navLinks = [
   { href: "/", label: "Home", icon: <FaHome /> },
   { href: "/dashboard", label: "Dashboard", icon: <FaThLarge /> },
-  { href: "/profile", label: "Profile", icon: <FaUser /> },
+  { href: "/settings", label: "Settings", icon: <FaTools /> },
   { href: "/videos", label: "Videos", icon: <FaVideo /> },
   { href: "/hot-takes", label: "Hot Takes", icon: <FaFire /> },
   { href: "/playlists", label: "Playlists", icon: <FaListUl /> },
@@ -49,7 +53,7 @@ const mobileLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const { collapsed, setCollapsed } = useContext(GlobalContext);
-  const { logoutMethod } = useContext(UserContext);
+  const { logoutMethod,isLogged,setIsLogged } = useContext(UserContext);
   const route = useRouter();
 
   async function logout() {
@@ -57,40 +61,44 @@ export default function Navbar() {
     if (response.success) {
       showSuccess("Logout SuccessFully!");
       route.push("/login");
+      setIsLogged(false)
     } else {
       showError("Failed to Logout");
     }
   }
 
   return (
+
     <>
       <div
+        //  onMouseOver={()=>setCollapsed((c)=> false)}
+        //  onMouse={()=>setCollapsed((c)=> true)}
         className={` hidden   hover:-hue-rotate-15 md:flex fixed top-0 left-0 h-screen  
              border-b 
     flex-col justify-between z-20
-    backdrop-blur-xl border-r mt-14
+    backdrop-blur-xl border-r
     dark:border-white/10 shadow-lg ${
-          collapsed ? "w-5rem hover:w-16rem   " : "w-16rem"
+          collapsed ? "w-5rem hover:w-16rem transition-all duration-300 ease-out  " : "w-16rem transition-all duration-300 ease-out " 
         } border-white/20 dark:border-2 dark:border-white shadow-lg  dark:shadow-blue-900/50 shadow-black/30  hover:shadow-xl  
         flex-col justify-between z-50 border-none transition-all duration-300  `}
         aria-label="Sidebar Navigation"
        
       >
-        {/* Collapse Button */}
+      
+     
         <button
           className={`absolute top-2 p-2 rounded-3xl  hover:bg-[#0054fb] text-[#000000] dark:bg-[#0063bf] cursor-pointer dark:text-black dark:hover:bg-[#00d9ff] transition-all duration-300 ${
             collapsed ? "right-6 " : "right-4"
           } `}
           onClick={() => setCollapsed((c) => !c)}
+         
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {collapsed ? <FaBars /> : <FaChevronLeft />}
         </button>
 
-        {/* Logo */}
         <div className="flex flex-col items-center pt-16 pb-4"></div>
 
-        {/* Nav Links */}
         <nav
           className={` flex-1  bg-transparent lg:pt-0 md:pt-2 flex flex-col gap-2  text-center 
           ${collapsed ? "px-3 w-fit" : " px-6"}  `}
@@ -135,12 +143,15 @@ export default function Navbar() {
                 </span>
               )}
             </Link>
+
+            
           ))}
 
-          {/* Account Pages Section */}
+   
           {!collapsed && (
             <>
-              <div className="mt-8 mb-2 text-xs font-bold text-[#23235b] dark:text-white tracking-wide">
+
+              <div className="mt-8 mb-2 text-xs font-bold italic text-[#23235b] dark:text-white tracking-wide">
                 ACCOUNT PAGES
               </div>
               <Link
@@ -151,16 +162,32 @@ export default function Navbar() {
                       ? "bg-[#dbeafe] text-[#23235b] shadow-lg dark:bg-[#221c3a] dark:text-white"
                       : "text-[#23235b] hover:bg-[#e3eafe] hover:text-[#7b2ff2] dark:text-[#b0b3c6] dark:hover:bg-[#23235b] dark:hover:text-white"
                   }`}
+                  
               >
                 <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#e3eafe] text-[#7b2ff2] dark:bg-[#23235b] dark:text-[#7b2ff2]">
                   <FaUser />
                 </span>
                 <span className="text-base font-bold">Profile</span>
               </Link>
-              <Link
+      
+
+              {isLogged?
+                 <button
                 href="/login"
-                className="group flex items-center gap-4 px-5 py-3 rounded-2xl font-semibold transition-all text-[#23235b] hover:bg-[#e3eafe] hover:text-[#7b2ff2] dark:text-[#b0b3c6] dark:hover:bg-[#23235b] dark:hover:text-white"
+                onClick={logout}
+                className="group flex cursor-pointer flex-row items-center text-center gap-4 px-3 py-1  rounded-2xl font-semibold transition-all  text-[#23235b]  hover:bg-invert not-dark:bg-[#e3eafe] hover:text-[#7b2ff2] dark:text-[#b0b3c6] dark:hover:bg-[#23235b] dark:hover:text-white "
               >
+                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#e3eafe] text-[#7b2ff2] dark:bg-[#23235b] dark:text-[#7b2ff2]">
+                  <FaUserPlus />
+                </span>
+                Logout
+              </button>
+              : 
+              <>
+                 <Link
+                href="/login"
+                className="group flex items-center gap-4 px-3 py-1 rounded-2xl font-semibold transition-all text-[#23235b] hover:bg-[#e3eafe] hover:text-[#7b2ff2] dark:text-[#b0b3c6] dark:hover:bg-[#23235b] dark:hover:text-white "
+                >
                 <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#e3eafe] text-[#7b2ff2] dark:bg-[#23235b] dark:text-[#7b2ff2]">
                   <FaSignInAlt />
                 </span>
@@ -168,24 +195,18 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/register"
-                className="group flex items-center gap-4 px-5 py-3 rounded-2xl font-semibold transition-all text-[#23235b] hover:bg-[#e3eafe] hover:text-[#7b2ff2] dark:text-[#b0b3c6] dark:hover:bg-[#23235b] dark:hover:text-white"
+                className="group flex items-center gap-4 px-3 py-1 rounded-2xl font-semibold transition-all text-[#23235b] hover:bg-[#e3eafe] hover:text-[#7b2ff2] dark:text-[#b0b3c6] dark:hover:bg-[#23235b] dark:hover:text-white"
               >
                 <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#e3eafe] text-[#7b2ff2] dark:bg-[#23235b] dark:text-[#7b2ff2]">
                   <FaUserPlus />
                 </span>
                 <span className="text-base font-bold">Sign Up</span>
               </Link>
+                </>
+              }
+             
 
-              <button
-                href="/login"
-                onClick={logout}
-                className="group flex cursor-pointer flex-row items-center text-center gap-4 px-5 py-3 rounded-2xl font-semibold transition-all text-[#23235b] hover:bg-[#e3eafe] hover:text-[#7b2ff2] dark:text-[#b0b3c6] dark:hover:bg-[#23235b] dark:hover:text-white"
-              >
-                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#e3eafe] text-[#7b2ff2] dark:bg-[#23235b] dark:text-[#7b2ff2]">
-                  <FaUserPlus />
-                </span>
-                Logout
-              </button>
+           
             </>
           )}
         </nav>

@@ -8,6 +8,7 @@ import {
   changePasswordApi,
 } from "@/services/user.service.js";
 import { showError, showInfo, showSuccess } from "../ui/toast.js";
+import { buttonStyle } from "@/styles/globals.js";
 
 const ProfileCard = () => {
   const { user, setUser } = useContext(UserContext);
@@ -96,8 +97,10 @@ const ProfileCard = () => {
     }
   };
 
+
+
   return (
-    <div className=" px-4 pb-20 opacity-100  ">
+    <div className=" px-4 pb-20 opacity-100     ">
       <div
         className="max-w-4xl mx-auto mt-30 bg-gradient-to-br from-indigo-300/40 via-blue-200/30 to-indigo-200/40 
 dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30 rounded-2xl shadow-lg opacity-90 backdrop-opacity-35 flex flex-col md:flex-row items-center p-8 gap-8"
@@ -158,14 +161,14 @@ dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[
           <div className="flex gap-2 mt-4">
             {edit ? (
               <button
-                className="bg-[#7b2ff2] text-white px-4 py-2 rounded-xl font-bold shadow hover:bg-[#5b1fd1] transition"
+                className={`   px-4 py-2 rounded-xl font-bold  transition ${buttonStyle} `}
                 onClick={handleSave}
               >
                 Save
               </button>
             ) : (
               <button
-                className="bg-[#e3eafe] dark:bg-[#7b2ff2] text-[#23235b] dark:text-white px-4 py-2 rounded-xl font-bold shadow hover:bg-[#dbeafe] dark:hover:bg-[#5b1fd1] transition"
+                className={`   px-4 py-2 rounded-xl font-bold  transition ${buttonStyle} `}
                 onClick={() => setEdit(true)}
               >
                 Edit Profile
@@ -182,10 +185,10 @@ dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto mt-8 opacity-80 grid grid-cols-1 space-x-6 md:grid-cols-2 gap-6">
+      <div className="max-w-4xl mx-auto mt-8 opacity-80 grid grid-cols-1  md:grid-cols-2 gap-6">
         <div
           className="bg-gradient-to-br from-indigo-300/40 via-blue-200/30 to-indigo-100/40 
-dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30  rounded-2xl space-y-6 shadow p-6"
+dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30  rounded-2xl shadow p-6"
         >
           <h3 className=" flex flex-row font-bold text-lg mb-4 text-[#23235b] dark:text-white">
             Profile Detials__{" "}
@@ -249,7 +252,7 @@ dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[
 
                 <button
                   type="submit"
-                  className="bg-[#30007e] text-white px-4 py-2 rounded-xl font-bold shadow hover:bg-[#5b1fd1] transition"
+                 className={`   px-4 py-2 rounded-xl font-bold  transition ${buttonStyle} `}
                 >
                   Update Password
                 </button>
@@ -259,7 +262,7 @@ dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[
             <>
               <button
                 onClick={() => setShowPasswordForm(true)}
-                className="py-2 mt-4 px-4 hover:bg-violet-700  bg-[#4307a3] rounded-2xl cursor-pointer"
+             className={`   px-4 py-2 rounded-xl font-bold  transition ${buttonStyle} `}
               >
                 Change Password
               </button>

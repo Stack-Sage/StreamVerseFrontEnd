@@ -10,7 +10,8 @@ export const UserProvider = ({children})=>{
    
    
    const [user,setUser] = useState(null);
-
+   const [isLogged,setIsLogged] = useState(false)
+   
    useEffect(()=>{
       const storedUser = localStorage.getItem("user");
       if(storedUser){
@@ -62,6 +63,8 @@ return (
    setUser, 
    loginMethod,
    logoutMethod,
+   isLogged,
+   setIsLogged,
 
    }} >
       {children}
