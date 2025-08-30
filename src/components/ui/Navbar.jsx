@@ -19,17 +19,16 @@ import {
   FaTools,
 } from "react-icons/fa";
 
-import { buttonStyle } from "@/styles/globals";
+
 import { MdSubscriptions } from "react-icons/md";
 import { usePathname, useRouter } from "next/navigation";
-import { ThemeToggle } from "./ThemeToggleButton";
+
 import { useState, useContext } from "react";
 import { GlobalContext } from "@/context/globalContext";
 import { UserContext } from "@/context/UserContext";
-import Button from "../Auth/AuthButton";
-import UniButton from "./UniButton";
+
 import { showError, showSuccess } from "./toast";
-import TopBar from "./TopBar";
+
 
 // All routes for desktop sidebar
 const navLinks = [
@@ -53,7 +52,7 @@ const mobileLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const { collapsed, setCollapsed } = useContext(GlobalContext);
-  const { logoutMethod,isLogged,setIsLogged } = useContext(UserContext);
+  const { logoutMethod,isLogged} = useContext(UserContext);
   const route = useRouter();
 
   async function logout() {
@@ -61,7 +60,7 @@ export default function Navbar() {
     if (response.success) {
       showSuccess("Logout SuccessFully!");
       route.push("/login");
-      setIsLogged(false)
+    
     } else {
       showError("Failed to Logout");
     }
@@ -75,7 +74,7 @@ export default function Navbar() {
         //  onMouse={()=>setCollapsed((c)=> true)}
         className={` hidden   hover:-hue-rotate-15 md:flex fixed top-0 left-0 h-screen  
              border-b 
-    flex-col justify-between z-20
+    flex-col justify-between z-40 
     backdrop-blur-xl border-r
     dark:border-white/10 shadow-lg ${
           collapsed ? "w-5rem hover:w-16rem transition-all duration-300 ease-out  " : "w-16rem transition-all duration-300 ease-out " 

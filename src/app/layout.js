@@ -6,9 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import ContentWrapper from "../utils/ContentWrapper";
 import { GlobalProvider } from "@/context/globalContext";
-import Tooltip from "@/components/ui/FloatingTop";
-import TopBar from "@/components/ui/TopBar";
-import LenisProvider from "@/components/ui/LenisWrapper";
+
 import { VideoProvider } from "@/context/VideoContext";
 
 const geistSans = Geist({
@@ -54,13 +52,13 @@ export default function RootLayout({ children }) {
              
                 <Navbar />
 
-                <TopBar/>
       
                 <div className="flex flex-col  h-screen">
 
                   
                   <main className="flex-1 overflow-y-auto scroll-smooth scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-transparent hover:scrollbar-thumb-cyan-600  scroll-container  ">
 
+           
                     {children}
             
                   </main>

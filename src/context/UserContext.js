@@ -17,6 +17,12 @@ export const UserProvider = ({children})=>{
       if(storedUser){
          setUser(JSON.parse(storedUser))
       }
+      if(localStorage.getItem("user")){
+         setIsLogged(true)
+      }
+      else{
+         setIsLogged(false)
+      }
    },[])
 
    
@@ -25,7 +31,10 @@ export const UserProvider = ({children})=>{
          const response = await loginUserApi(userData)
          if(response && response?.data?.user){
               setUser(response.data.user)
-               localStorage.setItem("user",JSON.stringify(response.data.user))
+              localStorage.setItem("user",JSON.stringify(response.data.user))
+              
+                  setIsLogged(true)
+             
             }
             return response;
          }
@@ -42,6 +51,7 @@ export const UserProvider = ({children})=>{
             if(response.success){
                setUser(null)
                localStorage.removeItem("user")
+               setIsLogged(false)
             }
             return response;
          }
