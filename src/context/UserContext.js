@@ -1,28 +1,41 @@
 'use client'
 import { showError, showSuccess } from "@/components/ui/toast";
-import { loginUserApi, logoutUserApi } from "@/services/user.service";
-import React,{createContext, useState,useEffect} from "react";
+import { getCurrentUserApi, loginUserApi, logoutUserApi } from "@/services/user.service";
+import React,{createContext, useState,useEffect, useRef} from "react";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({children})=>{
 
    
-   
+   const [isLoggedIn,setIsLoggedIn]= useState(false);
    const [user,setUser] = useState(null);
-   const [isLogged,setIsLogged] = useState(false)
+   
    
    useEffect(()=>{
-      const storedUser = localStorage.getItem("user");
-      if(storedUser){
-         setUser(JSON.parse(storedUser))
+      async function verifyUser(){
+         try {
+            // console.log("before api");
+            
+            const response = await getCurrentUserApi();
+            // console.log("after api");
+            
+            if(response && response.data){
+               // console.log("after res",response.data);
+               
+               // console.log("response is :",response.data.user)
+               setUser(response.data.user)
+               setIsLoggedIn(true)
+               localStorage.setItem("user",JSON.stringify(response.user))
+            }
+            
+         } catch (error) {
+            setUser(null);
+            setIsLoggedIn(false);
+            localStorage.removeItem("user")
+         }
       }
-      if(localStorage.getItem("user")){
-         setIsLogged(true)
-      }
-      else{
-         setIsLogged(false)
-      }
+      verifyUser()
    },[])
 
    
@@ -33,7 +46,7 @@ export const UserProvider = ({children})=>{
               setUser(response.data.user)
               localStorage.setItem("user",JSON.stringify(response.data.user))
               
-                  setIsLogged(true)
+                setIsLoggedIn(true)
              
             }
             return response;
@@ -51,7 +64,7 @@ export const UserProvider = ({children})=>{
             if(response.success){
                setUser(null)
                localStorage.removeItem("user")
-               setIsLogged(false)
+               setIsLoggedIn(false)
             }
             return response;
          }
@@ -61,10 +74,7 @@ export const UserProvider = ({children})=>{
          }
       }
       
-      const changeAvatar = async()=>{
-
-      }
-
+   
 
 
 return (
@@ -73,11 +83,12 @@ return (
    setUser, 
    loginMethod,
    logoutMethod,
-   isLogged,
-   setIsLogged,
+   isLoggedIn
 
    }} >
       {children}
    </UserContext.Provider>
 )
 };
+
+

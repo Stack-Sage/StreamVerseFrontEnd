@@ -8,7 +8,10 @@ export const VideoContext = createContext();
 
 
 export const VideoProvider = ({ children }) => {
+
+ 
   const [allVideos, setAllVideos] = useState([]);
+
   const [videoFilters ,setVideoFilters] = useState({
       page: 1 || "",
       limit: 50 | "",

@@ -26,20 +26,24 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning  = "true" >
+    <html lang="en" suppressHydrationWarning  = "true"  >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased
           text-black dark:text-white font-sans font-medium
-          w-screen  transition-colors duration-300 brightness-110 
-         bg-gradient-to-br from-blue-400/80 contrast-[1.1] via-blue-600/10 to-blue-300/90  dark:from-black/70 dark:via-slate-950/90
-          dark:to-black/60
-          h-screen overflow-hidden`}
+          w-screen  bg-gradient-to-br  transition-colors duration-300 brightness-110 
+        contrast-[1.1] dark:from-black/70 dark:via-slate-950/90
+          dark:to-black/60 h-screen overflow-hidden
+       
+       
+           from-indigo-300/60 via-indigo-400/70 to-violet-300/60
+      backdrop-blur-3xl backdrop-saturate-200 backdrop-contrast-125
+          `}
       >
 
 
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
           >
@@ -56,7 +60,7 @@ export default function RootLayout({ children }) {
                 <div className="flex flex-col  h-screen">
 
                   
-                  <main className="flex-1 overflow-y-auto scroll-smooth scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-transparent hover:scrollbar-thumb-cyan-600  scroll-container  ">
+                  <main className="flex-1 overflow-y-auto scroll-smooth scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-transparent hover:scrollbar-thumb-cyan-600    ">
 
            
                     {children}

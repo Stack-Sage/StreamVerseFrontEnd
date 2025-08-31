@@ -127,6 +127,8 @@ const getCurrentUserApi = async()=>{
       `${BASE_URL}/users/current-user`,
       {withCredentials:true}
     )
+    // console.log(response , "this is api response")
+    // console.log(response.data)
     return response.data;
   }
   catch(error){

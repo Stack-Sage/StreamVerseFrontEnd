@@ -11,7 +11,11 @@ import {
   FaFlag,
 } from "react-icons/fa";
 
+import { useRouter } from "next/navigation";
+
 const VideoCard = () => {
+
+  const route = useRouter()
   const menuList = [
     { menu: "Add To Playlist", event: "addToPlaylist", link: "", icon: FaPlusSquare },
     { menu: "Download", event: "downloadVideo", link: "", icon: FaFileDownload },
@@ -21,10 +25,10 @@ const VideoCard = () => {
 
   const { allVideos } = useContext(VideoContext);
   const [openMenuId, setOpenMenuId] = useState(null);
-  const [animateMenuId, setAnimateMenuId] = useState(null); // for animation
+  const [animateMenuId, setAnimateMenuId] = useState(null);
   const cardRefs = useRef({});
 
-  // Close menu on outside click
+ 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!Object.values(cardRefs.current).some((ref) => ref?.contains(e.target))) {
@@ -36,13 +40,18 @@ const VideoCard = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [openMenuId]);
 
-  // Remove animation element after animation ends
+
   useEffect(() => {
     if (!openMenuId && animateMenuId) {
-      const timer = setTimeout(() => setAnimateMenuId(null), 200); // matches transition duration
+      const timer = setTimeout(() => setAnimateMenuId(null), 200); 
       return () => clearTimeout(timer);
     }
   }, [openMenuId, animateMenuId]);
+
+  const openVideoPlayer = (id)=>{
+    console.log(id)
+    route.push(`/videos/${id}`)
+  }
 
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 md:gap-6 lg:gap-10">
@@ -58,12 +67,12 @@ const VideoCard = () => {
 
         return (
           <div
-            onClick={() => {}}
+            onClick={() => {openVideoPlayer(video._id)}}
             key={video._id}
             ref={(el) => (cardRefs.current[video._id] = el)}
             className="group relative lg:w-[28em] md:w-[26em] md:h-[16em] h-[18em] w-[20em] lg:h-[22em] hover:bg-black/5 dark:hover:bg-blue-100/5 hover:scale-[1.01] ease-out transition-all duration-300 rounded-xl cursor-pointer hover:shadow-md hover:dark:shadow-lg overflow-visible hover:brightness-110 hover:saturate-[1.2] "
           >
-            {/* Video Thumbnail */}
+          
             <div className="relative">
               <video
                 src={video.videoFile}
@@ -111,7 +120,7 @@ const VideoCard = () => {
                 </p>
               </div>
 
-              {/* Three-dot button */}
+          
               <div
                 className="absolute right-1 bottom-4 lg:bottom-8 md:bottom-5 text-gray-800 dark:hover:bg-gray-300/20 hover:bg-black/10 rounded-full p-3 dark:text-gray-200 hover:text-black dark:hover:text-white transition-all duration-200 ease-out z-20"
                 onClick={(e) => {

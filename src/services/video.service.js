@@ -22,8 +22,23 @@ const showAllVideosApi = async(filters)=>{
    }
 }
 
+const getVideoById = async(id) =>{
+   try {
+      const response = await axios.get(`${BASE_URL}/videos/${id}`,
+         {
+            withCredentials:true
+         }
+      )
+      console.log("response is : ",response)
+      return response.data
+      
+   } catch (error) {
+      throw error
+   }
+}
 
 export {
    showAllVideosApi,
+   getVideoById,
 
 }

@@ -6,7 +6,7 @@ import { showError, showSuccess } from "../ui/toast";
 import { cardStyle } from "@/styles/globals";
 
 export default function LoginForm() {
-  const {loginMethod,} = useContext(UserContext)
+  const {loginMethod,isLoggedIn} = useContext(UserContext)
 
   const [loginType, setLoginType] = useState("username");
 
@@ -49,7 +49,7 @@ export default function LoginForm() {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-        {/* Choose Login Type */}
+       
         <h1 className="text-center text-lg">Choose Login Method </h1>
         <div className="flex gap-4 mb-2 justify-center">
           <button

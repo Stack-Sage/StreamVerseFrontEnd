@@ -48,7 +48,7 @@ export default function VideoSearch() {
             alt="profile"
             onClick={()=>router.push('/profile')}
    
-            className="w-10 h-10 cursor-pointer hover:scale-[1.04] transition-all duration-200 ease-out   rounded-full border border-neutral-600"
+            className="w-10 h-10 cursor-pointer hover:scale-[1.04] transition-all duration-200 ease-out   rounded-full border object-cover border-neutral-600"
           />
         </div>
       </div>
