@@ -7,7 +7,7 @@ export const UserContext = createContext();
 
 export const UserProvider = ({children})=>{
 
-   
+   const [profile,setProfile] = useState(null)
    const [isLoggedIn,setIsLoggedIn]= useState(false);
    const [user,setUser] = useState(null);
    
@@ -83,7 +83,9 @@ return (
    setUser, 
    loginMethod,
    logoutMethod,
-   isLoggedIn
+   isLoggedIn,
+   profile,
+   setProfile
 
    }} >
       {children}

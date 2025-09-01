@@ -60,7 +60,7 @@ export default function RootLayout({ children }) {
                 <div className="flex flex-col  h-screen">
 
                   
-                  <main className="flex-1 overflow-y-auto scroll-smooth scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-transparent hover:scrollbar-thumb-cyan-600    ">
+                  <main className="flex-1 overflow-y-auto scroll-smooth scrollbar-track-transparent     ">
 
            
                     {children}

@@ -135,7 +135,23 @@ const getCurrentUserApi = async()=>{
     throw error;
   }
 
+
 }
+
+const getUserChannelProfileApi = async(showUsername)=>{
+  try {
+    
+    console.log(showUsername,"should be the fool")
+    const response = await axios.get(`${BASE_URL}/users/c/${showUsername}`,
+      {withCredentials: true}
+    )
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}
+
+
 
 export {
   registerUserApi,
@@ -145,5 +161,6 @@ export {
   updateCoverImageApi,
   logoutUserApi,
   changePasswordApi,
-  getCurrentUserApi
+  getCurrentUserApi,
+  getUserChannelProfileApi
 };
