@@ -11,13 +11,28 @@ import {
 import { showError, showInfo, showSuccess } from "../ui/toast.js";
 import { buttonStyle } from "@/styles/globals.js";
 
-const CustomProfileCard = () => {
-  const {profile,setProfile} = useContext(UserContext) 
-  console.log(profile)
+
+const CustomProfileCard = ({profileId}) => {
+
+ const { profile, setProfile } = useContext(UserContext);
+
+
+  useEffect(() => {
+    async function fetchProfile() {
+      try {
+        const response = await getUserChannelProfileApi(profileId);
+        setProfile(response.data);
+      } catch (error) {
+        showError("Error fetching profile");
+      }
+    }
+    if (profileId) fetchProfile();
+  }, [profileId, setProfile]);
+
 
 
   return (
-    <div className=" px-4 pb-20 opacity-100  border-2  flex  flex-col mx-auto justify-center  w-fit    ">
+    <div className=" px-4 pb-20 opacity-100  flex  flex-col mx-auto justify-center  w-fit    ">
       <div
         className="max-w-4xl mx-auto mt-30 bg-gradient-to-br from-indigo-300/40 via-blue-200/30 to-indigo-200/40 
 dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30 rounded-2xl shadow-lg opacity-90 backdrop-opacity-35 flex flex-col md:flex-row items-center p-8 gap-8"
@@ -42,6 +57,15 @@ dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[
           <h1 className="bg-transparent text-xl w-fit text-center text-[#23235b] dark:text-white rounded px-3 py-1 mb-2">
             {profile?.email}
           </h1>
+           {!profile?.isCurrentUser && (
+        <button className={`${buttonStyle} mt-4 py-2 rounded-full`} 
+ 
+        >
+          {profile?.isSubscribed ? "Subscribed" : "Subscribe"}
+          
+        </button>
+      )}
+    
         </div>
 
         <div className="flex-col space-y-4 mr-10">

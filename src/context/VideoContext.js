@@ -11,6 +11,7 @@ export const VideoProvider = ({ children }) => {
 
  
   const [allVideos, setAllVideos] = useState([]);
+  const [comments,setComments] = useState([])
 
   const [videoFilters ,setVideoFilters] = useState({
       page: 1 || "",
@@ -44,7 +45,8 @@ export const VideoProvider = ({ children }) => {
     <VideoContext.Provider value={{ 
       allVideos,
      setAllVideos,
-
+      comments,
+      setComments
       }}>
       {children}
     </VideoContext.Provider>
