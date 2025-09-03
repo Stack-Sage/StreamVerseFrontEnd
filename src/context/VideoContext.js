@@ -12,7 +12,9 @@ export const VideoProvider = ({ children }) => {
  
   const [allVideos, setAllVideos] = useState([]);
   const [comments,setComments] = useState([])
-
+  const [currentVideo,setCurrentVideo] = useState(null)
+  const [videoLike,setVideoLike] = useState(null)
+  const [commentLike,setCommentLike] = useState(null)
   const [videoFilters ,setVideoFilters] = useState({
       page: 1 || "",
       limit: 50 | "",
@@ -38,7 +40,7 @@ export const VideoProvider = ({ children }) => {
       }
        }
     fetchVideos();
-  }, []);
+  }, [videoFilters]);
   console.log(allVideos)
 
   return (
@@ -46,7 +48,13 @@ export const VideoProvider = ({ children }) => {
       allVideos,
      setAllVideos,
       comments,
-      setComments
+      setComments,
+      currentVideo,
+      setCurrentVideo,
+      videoLike,
+      setVideoLike,
+      commentLike,
+      setCommentLike
       }}>
       {children}
     </VideoContext.Provider>

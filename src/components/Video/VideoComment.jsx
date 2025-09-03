@@ -6,12 +6,13 @@ import { buttonStyle } from '@/styles/globals';
 import { useLikeHandling } from './LikeHandling';
 
 export default function VideoComments({
+  commentLike,
   comments,
   user,
   myComment,
   setMyComment,
   uploadComment,
-  uploadReply, // <-- new prop for replies
+  uploadReply, 
   currentVideo,
   deleteComment,
 }) {
@@ -65,7 +66,10 @@ export default function VideoComments({
             <div className='flex flex-row gap-4 items-center mt-2'>
               <h1 className='flex-row flex items-center gap-1 cursor-pointer active:scale-[0.9] dark:hover:bg-white/10 px-3 py-2 rounded-full hover:bg-black/10'
               onClick={() => handleCommentLike(com._id)}>
-                <FaThumbsUp /> <p>{com.likes || 0}</p>
+                <FaThumbsUp /> <p>{ com.likesCount || 0}
+
+                  {console.log(com.likesCount, "other comments likes are")}
+                </p>
               </h1>
             
               <button

@@ -8,6 +8,7 @@ import ContentWrapper from "../utils/ContentWrapper";
 import { GlobalProvider } from "@/context/globalContext";
 
 import { VideoProvider } from "@/context/VideoContext";
+import { TakesProvider } from "@/context/hotTakeContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,6 +53,8 @@ export default function RootLayout({ children }) {
             <ContentWrapper>
               <UserProvider>
                 <VideoProvider>
+                  <TakesProvider>
+
 
              
                 <Navbar />
@@ -68,6 +71,7 @@ export default function RootLayout({ children }) {
                   </main>
                 </div>
                 
+                  </TakesProvider>
                 </VideoProvider>
               </UserProvider>
               

@@ -19,14 +19,14 @@ import { useLikeHandling } from '@/components/Video/LikeHandling';
 
 
 export default function VideoPlayerPage() {
-  const { allVideos, comments = [], setComments } = useContext(VideoContext);
+  const { allVideos, comments = [], setComments , currentVideo,setCurrentVideo,videoLike,commentLike } = useContext(VideoContext);
   const { likedVideos, handleVideoLike, handleCommentLike, fetchLikedVideos } = useLikeHandling();
   const params = useParams();
   const videoId = params.id;
   const [myComment, setMyComment] = useState("");
   const { profile, setProfile, user } = useContext(UserContext);
+ 
 
-  const [currentVideo, setCurrentVideo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [fullDesc, setFullDesc] = useState(false);
   const route = useRouter();
@@ -129,10 +129,11 @@ export default function VideoPlayerPage() {
             </button>
           </div>
           <div className="flex flex-row scale-75 lg:justify-end lg:scale-100 md:scale-100 gap-2 lg:gap-4 justify-center md:justify-end">
-            <button className={`${buttonStyle} flex items-center gap-2 px-3 py-1 rounded-full`}
-            onClick={() => handleVideoLike(currentVideo._id)}
+            <button className={`${buttonStyle}  flex items-center gap-2 px-3 py-1 rounded-full`}
+            onClick={() =>  handleVideoLike(currentVideo._id)}
             >
-              <FaThumbsUp /> <span>3</span>
+             
+              <FaThumbsUp /> <span>{currentVideo?.likesCount || 0}</span>
             </button>
             <button className={`${buttonStyle} flex items-center gap-2 px-3 py-1 rounded-full`}>
               <FaShare /> Share
@@ -173,6 +174,7 @@ export default function VideoPlayerPage() {
           uploadComment={uploadComment}
           currentVideo={currentVideo}
           deleteComment={deleteComment}
+          commentLike={commentLike}
         />
       </div>
     </main>

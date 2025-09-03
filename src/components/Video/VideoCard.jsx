@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 
 import { useRouter } from "next/navigation";
+import { showInfo } from "../ui/toast";
 
 const VideoCard = () => {
 
@@ -49,7 +50,7 @@ const VideoCard = () => {
   }, [openMenuId, animateMenuId]);
 
   const openVideoPlayer = (id)=>{
-    console.log(id)
+    showInfo("Opening video player...")
     route.push(`/videos/${id}`)
   }
 
@@ -133,7 +134,7 @@ const VideoCard = () => {
                 <FaEllipsisV />
               </div>
 
-              {/* Portal Animated Menu */}
+          
               {(isMenuOpen || isAnimating) &&
                 rect &&
                 createPortal(
