@@ -16,6 +16,7 @@ import { getUserChannelProfileApi } from '@/services/user.service';
 import { useCommentFunctions } from '@/components/Comment/uploadComment';
 import VideoComments from '@/components/Video/VideoComment';
 import { useLikeHandling } from '@/components/Video/LikeHandling';
+import VideoUploadForm from '@/components/Video/VideoUploadForm';
 
 
 export default function VideoPlayerPage() {
@@ -83,6 +84,7 @@ export default function VideoPlayerPage() {
 
   return (
     <main className="mt-16 m-1 md:px-6 lg:mx-8 mb-20 relative mx-auto items-center flex rounded-lg pt-16">
+        
       <div className='z-50'>
         <VideoSearch />
       </div>

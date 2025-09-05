@@ -20,19 +20,19 @@ import { GlobalContext } from "@/context/globalContext";
 import { UserContext } from "@/context/UserContext";
 import { showError, showSuccess } from "./toast";
 
-// All routes for desktop sidebar
+
 const navLinks = [
   { href: "/", label: "Home", icon: <FaHome /> },
   { href: "/profile", label: "Profile", icon: <FaUser /> },
-  { href: "/dashboard", label: "Dashboard", icon: <FaThLarge /> },
-  { href: "/settings", label: "Settings", icon: <FaStream /> },
   { href: "/videos", label: "Videos", icon: <FaVideo /> },
   { href: "/hot-takes", label: "Hot Takes", icon: <FaFire /> },
+  { href: "/dashboard", label: "Dashboard", icon: <FaThLarge /> },
   { href: "/playlists", label: "Playlists", icon: <FaListUl /> },
   { href: "/subscriptions", label: "Subscriptions", icon: <MdSubscriptions /> },
+  { href: "/settings", label: "Settings", icon: <FaStream /> },
 ];
 
-// Only show these on mobile
+
 const mobileLinks = [
   { href: "/", label: "Home", icon: <FaHome /> },
   { href: "/dashboard", label: "Dashboard", icon: <FaThLarge /> },
@@ -58,18 +58,18 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Desktop Sidebar */}
+ 
       <div
         onMouseOver={() => setCollapsed(false)}
         onMouseOut={() => setCollapsed(true)}
-        className={`hidden md:flex fixed top-0 left-0 h-screen
+        className={`hidden md:flex absolute top-0 left-0 h-screen
           flex-col justify-between z-50
           backdrop-blur-xl shadow-black/30 dark:border-white/10 shadow-xl dark:shadow-blue-800/50
           transition-[width,padding,margin] duration-300  ease-out
-          ${collapsed ? "w-20 px-2" : "w-56 px-6"}`}
+          ${collapsed ? "w-20 px-2" : " px-6"}`}
         aria-label="Sidebar Navigation"
-      >
-        {/* Top Button / Logo */}
+      > 
+      
         <button
           className={`absolute top-2 p-2 rounded-3xl text-black dark:text-black text-2xl transition-all duration-300
             ${collapsed ? "right-6" : "left-8"}`}
@@ -80,7 +80,7 @@ export default function Navbar() {
 
         <div className="flex flex-col items-center pt-16 pb-4"></div>
 
-        {/* Navigation Links */}
+       
         <nav
           className={`flex-1 bg-transparent lg:pt-0 md:pt-2 flex flex-col gap-2 text-center transition-[padding] duration-300   ease-in-out`}
           aria-label="Main Navigation"

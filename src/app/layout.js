@@ -31,12 +31,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased
           text-black dark:text-white font-sans font-medium
-          w-screen  bg-gradient-to-br  transition-colors duration-300 brightness-110 
+          w-screen  bg-gradient-to-tr  transition-colors duration-300 brightness-110 
         contrast-[1.1] dark:from-black/70 dark:via-slate-950/90
           dark:to-black/60 h-screen overflow-hidden
        
        
-           from-indigo-300/60 via-indigo-400/70 to-violet-300/60
+           from-rose-200/50 via-rose-300/70 to-rose-400/30
       backdrop-blur-3xl backdrop-saturate-200 backdrop-contrast-125
           `}
       >
@@ -56,7 +56,7 @@ export default function RootLayout({ children }) {
                   <TakesProvider>
 
 
-             
+
                 <Navbar />
 
       

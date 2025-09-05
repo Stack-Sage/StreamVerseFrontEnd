@@ -37,8 +37,22 @@ const getVideoById = async(id) =>{
    }
 }
 
+
+const publishVideoApi = async(formData) =>{
+   try {
+      const response = await axios.post(`${BASE_URL}/videos/`, formData, {
+         withCredentials:true
+      })
+      return response.data
+   } catch (error) {
+      throw error
+   }
+}
+
 export {
    showAllVideosApi,
    getVideoById,
+   publishVideoApi,
+   
 
 }

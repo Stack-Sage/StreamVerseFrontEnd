@@ -22,11 +22,10 @@ export const UserProvider = ({children})=>{
             
             if(response && response.data){
                // console.log("after res",response.data);
-               
-               // console.log("response is :",response.data.user)
+      
                setUser(response.data.user)
                setIsLoggedIn(true)
-               localStorage.setItem("user",JSON.stringify(response.user))
+               localStorage.setItem("user",JSON.stringify(response.data.user))
             }
             
          } catch (error) {

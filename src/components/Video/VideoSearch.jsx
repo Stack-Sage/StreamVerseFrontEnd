@@ -4,6 +4,7 @@ import { FaSearch, FaPlus } from "react-icons/fa";
 import { ThemeToggle } from "../ui/ThemeToggleButton";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import VideoUploadForm from "./VideoUploadForm";
 
 export default function VideoSearch() {
 
@@ -36,11 +37,8 @@ export default function VideoSearch() {
 
         <div className="flex items-center space-x-4">
           <ThemeToggle/>
-          <button className="flex items-center space-x-2 px-3 py-1 bg-neutral-800 hover:bg-neutral-700 rounded-full">
-            <FaPlus className="text-sm" />
-
-            <span className="hidden md:inline text-sm">Create</span>
-          </button>
+        
+    
 
       
           <img
