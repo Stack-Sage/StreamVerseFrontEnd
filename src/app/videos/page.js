@@ -6,7 +6,7 @@ export default function Videos() {
   return (
     <main className="mb-20 relative mx-auto items-center justify-center flex rounded-lg min-h-screen pt-16 ">
       
-      <div className=' fixed bottom-5 right-5 z-50'>
+      <div className=' fixed lg:bottom-5 bottom-14 right-5 z-50'>
       
              <VideoUploadForm/>
               </div>

@@ -7,6 +7,8 @@ import { showError, showInfo, showSuccess } from '../ui/toast'
 const VideoUploadForm = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [thumbnailPreview, setThumbnailPreview] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [status , setStatus] = useState('Upload')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -14,11 +16,15 @@ const VideoUploadForm = () => {
     try {
 
       showInfo("Uploading video...")
+      setIsLoading(true)
+      setStatus('Uploading...')
       const data = await publishVideoApi(formData)
       console.log('Video uploaded successfully:', data)
       setIsOpen(false)
       showSuccess("Video Uploaded Successfully")
-      setThumbnailPreview(null) 
+      setThumbnailPreview(null)
+      setIsLoading(false)
+      setStatus('Uploaded')
     } catch (error) {
       showError("Video Upload Failed")
       console.error('Error uploading video:', error)
@@ -40,13 +46,13 @@ const VideoUploadForm = () => {
  
       <button
         onClick={() => setIsOpen(true)}
-        className="px-4 py-2 bg-black text-white rounded-md hover:bg-neutral-800 transition flex items-center gap-2"
+        className="px-4 py-2  bg-black text-white rounded-md hover:bg-neutral-800 transition flex items-center gap-2"
       >
         <FaUpload /> Create Video
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex px-4 items-center justify-center z-50">
          
           <div
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -68,12 +74,14 @@ const VideoUploadForm = () => {
 
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <input
+              required
                 type="text"
                 name="title"
                 placeholder="Title"
                 className="p-2 rounded-md bg-neutral-800 border border-neutral-700 focus:outline-none focus:border-white text-white placeholder-gray-400"
               />
               <textarea
+              required
                 name="description"
                 placeholder="Description"
                 className="p-2 rounded-md bg-neutral-800 border border-neutral-700 focus:outline-none focus:border-white text-white placeholder-gray-400"
@@ -82,25 +90,21 @@ const VideoUploadForm = () => {
               <div className="flex flex-col gap-2">
                 <label className="text-sm text-gray-300">Thumbnail</label>
                 <input
+                required
                   type="file"
                   name="thumbnail"
                   accept="image/*"
                   onChange={handleThumbnailChange}
                   className="p-2 rounded-md bg-neutral-800 border border-neutral-700 focus:outline-none focus:border-white text-white file:mr-4 file:rounded-md file:border-0 file:bg-neutral-700 file:text-white hover:file:bg-neutral-600"
                 />
-                {thumbnailPreview && (
-                  <img
-                    src={thumbnailPreview}
-                    alt="Thumbnail Preview"
-                    className="mt-2 rounded-md border border-neutral-700 max-h-40 object-contain"
-                  />
-                )}
+               
               </div>
 
         
               <div className="flex flex-col gap-2">
                 <label className="text-sm text-gray-300">Video</label>
                 <input
+                required
                   type="file"
                   name="videoFile"
                   accept="video/*"
@@ -112,8 +116,9 @@ const VideoUploadForm = () => {
                 type="submit"
                 className="px-4 py-2 bg-white text-black font-medium rounded-md hover:bg-neutral-200 transition"
               >
-                Upload
+                {status}
               </button>
+              {isLoading && <p className="text-center text-blue-400">{showInfo("Uploading...")}</p>}
             </form>
           </div>
         </div>
