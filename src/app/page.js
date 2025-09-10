@@ -17,8 +17,8 @@ export default function Page() {
     <main className="min-h-screen w-full flex flex-col items-center justify-center px-4 pt-20 pb-16 bg-transparent transition-colors duration-300">
       <HeroSection />
      
-      <TechStackSection />
       <ExploreSection />
+      <TechStackSection />
       <HowItWorksSection />
       <FAQSection />
 
