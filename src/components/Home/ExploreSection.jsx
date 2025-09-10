@@ -12,7 +12,7 @@ export default function ExploreSection() {
   return (
     <div className="w-full max-w-6xl mb-16 px-2">
       <h2 className="text-3xl font-extrabold text-neutral-900 dark:text-white mb-8 tracking-tight text-center">Explore</h2>
-      <span className='flex flex-wrap text-center items-center'>
+      <span className='flex flex-wrap text-center items-center  justify-center '>
 
       <h2 className=' text-neutral-900 dark:text-white mb-8 tracking-tight text-center '>If You Don't want to register and explore the Website, You can use this <p className='font-bold'>Demo Account</p> to login - Click on Login button and Fill up those Detials </h2>
       </span>
