@@ -25,10 +25,16 @@ export default function HeroSection() {
 
      
 
-      <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-2">
-        ⚠️ Backend is complete having 45 APIs working behind the scenes.. Front Still Requires more time . 
-        But i'm sure you can explore Plenty in the mean time  ( Open in Windows for better experince )
+     <p className="text-md text-neutral-800 dark:text-neutral-500 mt-2">
+  <strong>Important:</strong> StreamVerse highlights full-stack development skills:
       </p>
+      <ul className="list-disc list-inside text-neutral-700 dark:text-neutral-500 mt-2 space-y-1">
+        <li>Custom backend built with Express and MongoDB, supporting <strong>45+ APIs</strong></li>
+        <li>Frontend developed in Next.js, React, and Tailwind CSS</li>
+        <li>User authentication and with Encyrption and Tokens </li>
+        <li>Video uploads, dynamic feeds, likes, and comments</li>
+      </ul>
+
     </section>
   );
 }
