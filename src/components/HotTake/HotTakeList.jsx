@@ -12,13 +12,14 @@ const HotTakeList = () => {
   const { fetchAllTakes, rateCapTake, rateFactsTake, rateMidTake, deleteHotTake, updateHotTake } = handleTakes()
   const { user } = useContext(UserContext)
   const [editTakeId, setEditTakeId] = useState(null)
-
   const [showNumId, setShowNumId] = useState([])
+
 
   useEffect(() => {
     fetchAllTakes()
   }, [])
 
+  
   return (
     <div className="  p-6">
       {takes.length === 0 ? (

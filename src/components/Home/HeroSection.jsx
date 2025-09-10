@@ -1,6 +1,6 @@
 export default function HeroSection() {
   return (
-    <section className="w-full max-w-5xl mx-auto text-center  space-y-8">
+    <section className="w-full max-w-5xl mx-auto text-center  space-y-8 -mt-10">
 
       <h1
         className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text 

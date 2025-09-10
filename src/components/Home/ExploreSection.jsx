@@ -8,14 +8,14 @@ const links = [
 
 export default function ExploreSection() {
   return (
-    <div className="w-full max-w-5xl mx-auto mb-16 px-4">
+    <div className="w-full max-w-5xl mx-auto mt-4 mb-16 px-4">
      
-      <h2 className="text-3xl font-extrabold text-neutral-900 dark:text-white mb-8 tracking-tight text-center">
+      <h2 className="text-3xl font-extrabold text-neutral-900 dark:text-white mb-4 tracking-tight text-center">
         Explore StreamVerse
       </h2>
 
  
-      <div className="text-center mb-8 space-y-4">
+      <div className="text-center mb-8 space-y-3">
         <p className="text-neutral-800 dark:text-neutral-200 text-lg">
           To unlock all pages and features, please{" "}
           <strong>log in</strong> or <strong>create an account</strong>.
