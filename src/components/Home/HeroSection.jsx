@@ -1,7 +1,7 @@
 export default function HeroSection() {
   return (
-    <section className="w-full max-w-5xl mx-auto text-center py-16 space-y-8">
-      {/* Title */}
+    <section className="w-full max-w-5xl mx-auto text-center  space-y-8">
+
       <h1
         className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text 
                    bg-gradient-to-r from-blue-600 via-pink-500 to-yellow-400
@@ -21,7 +21,8 @@ export default function HeroSection() {
       </p>
 
    
-      <div className="flex justify-center gap-3 mt-4">
+      <div className="flex justify-center gap-3 mt-2">
+        Upcoming Features Soon !!!
         {["Playlists", "Subscriptions", "Live Streams"].map((item, i) => (
           <span
             key={i}
@@ -34,7 +35,7 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* Feature Cards */}
+ 
       <div className="grid md:grid-cols-2 gap-6 mt-10 text-left">
         <div className="p-5 border rounded-2xl shadow hover:shadow-lg transition-shadow duration-300 flex items-start gap-3 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-sm">
           <span className="text-3xl">🛠️</span>
