@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
           dark:to-black/60 h-screen overflow-hidden
        
        
-           from-rose-200/50 via-rose-300/70 to-rose-400/30
+           from-blue-200/50 via-neutral-300/10 to-violet-200/30
       backdrop-blur-3xl backdrop-saturate-200 backdrop-contrast-125
           `}
       >
