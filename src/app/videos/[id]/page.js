@@ -27,6 +27,7 @@ export default function VideoPlayerPage() {
   const [myComment, setMyComment] = useState("");
   const { profile, setProfile, user } = useContext(UserContext);
  
+  const [tempSubs, setTempSubs] = useState("Subscribe")
 
   const [loading, setLoading] = useState(true);
   const [fullDesc, setFullDesc] = useState(false);
@@ -125,9 +126,10 @@ export default function VideoPlayerPage() {
             </div>
           
             <button
+            onClick={()=> tempSubs((prev)=>!prev)}
               className={`${buttonStyle} px-3 py-1 text-sm sm:text-base rounded-full ml-4`}
             >
-              {profile?.isSubscribed ? "Subscribed" : "Subscribe"}
+              {tempSubs}
             </button>
           </div>
           <div className="flex flex-row scale-75 lg:justify-end lg:scale-100 md:scale-100 gap-2 lg:gap-4 justify-center md:justify-end">
