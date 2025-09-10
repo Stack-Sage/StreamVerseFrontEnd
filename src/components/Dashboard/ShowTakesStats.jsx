@@ -24,13 +24,13 @@ const ShowTakesStats = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-8 text-center ">Your HotTakes </h1>
+      <h1 className="text-2xl font-bold mb-8 text-center ">Your Uploaded HotTakes </h1>
       {!tStats ? (
         <div className="flex justify-center items-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
         </div>
       ) : tStats.length === 0 ? (
-        <div className="text-center text-lg text-muted-foreground mt-10">No HotTakes found.</div>
+        <div className="text-center text-lg text-muted-foreground mt-10">No Takes are uploaded yet</div>
       ) : (
         <div className="overflow-x-auto pb-6">
           <div

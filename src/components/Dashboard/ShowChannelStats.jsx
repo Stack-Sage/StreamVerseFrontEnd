@@ -48,7 +48,7 @@ return (
          {statCards.map(card => (
             <div
                key={card.key}
-               className={`shadow-lg rounded-xl p-4 flex flex-col items-center justify-center hover:scale-105 transition-transform ${cardStyle} not-dark:hue-rotate-60 not-dark:saturate-150 contrast-125`}
+               className={`shadow-lg rounded-xl p-4 flex flex-col items-center justify-center hover:scale-105 transition-transform ${cardStyle}   contrast-125`}
             >
                <span className="text-4xl mb-2">{card.icon}</span>
                <span className="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-1">{card.label}</span>

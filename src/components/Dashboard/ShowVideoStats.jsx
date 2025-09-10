@@ -23,13 +23,13 @@ const ShowVideoStats = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-8 text-center ">Your Video </h1>
+      <h1 className="text-3xl font-bold mb-8 text-center ">Your Uploaded Videos </h1>
       {!vStats ? (
         <div className="flex justify-center items-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
         </div>
       ) : vStats.length === 0 ? (
-        <div className="text-center text-lg text-muted-foreground mt-10">No videos found.</div>
+        <div className="text-center text-lg text-muted-foreground mt-10"> No videos are uploaded. </div>
       ) : (
         <div className="overflow-x-auto pb-6">
           <div
