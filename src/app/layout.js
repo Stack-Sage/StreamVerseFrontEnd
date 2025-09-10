@@ -30,16 +30,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning  = "true"  >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased
-          text-black dark:text-white font-sans font-medium
-          w-screen  bg-gradient-to-tr  transition-colors duration-300 brightness-110 
-        contrast-[1.1] dark:from-black/70 dark:via-slate-950/90
-          dark:to-black/60 h-screen overflow-hidden
-       
-       
-           from-indigo-500/50 via-indigo-400/30 to-indigo-400/50
-      backdrop-blur-3xl backdrop-saturate-200 backdrop-contrast-125
-          `}
+        className={`dynamic-gradient ${geistSans.variable} ${geistMono.variable}
+    text-black dark:text-white font-sans font-medium
+    min-h-screen overflow-x-hidden
+    backdrop-blur-3xl backdrop-saturate-200 backdrop-contrast-125
+  `}
       >
 
 
@@ -66,7 +61,7 @@ export default function RootLayout({ children }) {
                 <div className="flex flex-col  h-screen">
 
                   
-                  <main className="flex-1 overflow-y-auto scroll-smooth scrollbar-track-transparent     ">
+                  <main className="flex-1 overflow-y-auto scroll-smooth scrollbar-track-transparent pb-16    ">
 
            
                     {children}

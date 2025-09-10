@@ -102,7 +102,7 @@ export default function VideoPlayerPage() {
     );
 
   return (
-    <main className="mt-16 m-1 md:px-6 lg:mx-8 mb-20 relative mx-auto items-center justify-center flex rounded-lg pt-16">
+    <main className="mt-6 m-1 md:px-6 lg:mx-8 mb-20 relative mx-auto items-center justify-center flex rounded-lg ">
       <div className="flex z-10 flex-col mt-4 rounded-lg w-full max-w-[70em]">
     
         <video

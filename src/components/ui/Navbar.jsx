@@ -34,7 +34,7 @@ const navLinks = [
 
 
 const mobileLinks = [
-  { href: "/", label: "Home", icon: <FaHome /> },
+  { href: "/videos", label: "Videos", icon: <FaVideo /> },
   { href: "/dashboard", label: "Dashboard", icon: <FaThLarge /> },
   { href: "/hot-takes", label: "Hot Takes", icon: <FaFire /> },
   { href: "/profile", label: "Profile", icon: <FaUser /> },
@@ -112,7 +112,7 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {/* Account Pages */}
+      
           <div className="mt-8 mb-2 text-xs font-bold italic text-[#23235b] dark:text-white tracking-wide">
             {collapsed ? "|||" : "ACCOUNT PAGES"}
           </div>
@@ -155,7 +155,7 @@ export default function Navbar() {
         </nav>
       </div>
 
-      {/* Mobile Bottom Navbar */}
+     
       <nav
         className="md:hidden fixed bottom-0 left-0 w-full shadow-inner dark:shadow-blue-900/50 shadow-black/40 flex justify-around items-center py-2 border-t
         bg-gradient-to-tr from-indigo-400/70 via-blue-400/100 to-indigo-300/90 dark:from-black/80 dark:via-slate-950 dark:to-black/80
