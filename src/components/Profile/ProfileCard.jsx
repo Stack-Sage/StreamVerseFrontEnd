@@ -102,8 +102,8 @@ const ProfileCard = () => {
   return (
     <div className=" px-4 pb-20 opacity-100     ">
       <div
-        className="max-w-4xl mx-auto mt-30 bg-gradient-to-br from-indigo-300/40 via-blue-200/30 to-indigo-200/40 
-dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30 rounded-2xl shadow-lg opacity-90 backdrop-opacity-35 flex flex-col md:flex-row items-center p-8 gap-8"
+        className="max-w-4xl lg:min-w-4xl mx-auto mt-30 bg-gradient-to-br from-indigo-300/40 via-blue-200/30 to-indigo-200/40 
+dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30 rounded-2xl shadow-lg opacity-90 backdrop-opacity-35 flex flex-col md:flex-row  items-center p-8 gap-8"
       >
         <div className="relative">
           <img
@@ -178,14 +178,14 @@ dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[
         </div>
         <div className="flex-col space-y-4 mr-10">
           <div>Videos Watched: {user?.watchHistory?.length || 0}</div>
-          <div>Watch Time - 2 hours</div>
+          <div>Watch Time - 0 hours</div>
           <div>Followers: {user?.followers?.length || 0}</div>
           <div>Following: {user?.following?.length || 0}</div>
           <div></div>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto mt-8 opacity-80 grid grid-cols-1  md:grid-cols-2 gap-6">
+      <div className=" lg:min-w-4xl max-w-4xl  mx-auto mt-8 opacity-80 grid grid-cols-1  md:grid-cols-2 gap-6">
         <div
           className="bg-gradient-to-br from-indigo-300/40 via-blue-200/30 to-indigo-100/40 
 dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30  rounded-2xl shadow p-6"

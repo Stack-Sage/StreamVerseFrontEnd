@@ -17,7 +17,7 @@ export default function Videos() {
           Note: Currently all the videos are uploaded by my friends or test accounts since this app is not yet in production. 
         </p>
       </div>
-      <div className="hover:scale-105 fixed bottom-0 right-5 ring-1 ring-indigo-500 transition-all duration-300 ease-out ">
+      <div className="hover:scale-105 fixed bottom-10 rounded-md right-5 z-50 ring-1 ring-indigo-500 transition-all duration-300 ease-out ">
 
          <VideoUploadForm/>
       </div>
