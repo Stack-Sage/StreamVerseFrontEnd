@@ -22,7 +22,7 @@ const HotTakeList = () => {
   return (
     <div className="  p-6">
       {takes.length === 0 ? (
-        <div className={` text-center  text-lg text-muted-foreground mt-10  `}>No HotTakes found.</div>
+        <div className={` text-center  text-lg text-muted-foreground mt-10  `}>Loading...</div>
       ) : (
         <div className={`   max-w-3xl mx-auto space-y-6 mb-20 `}>
           {takes.map((take) => (
