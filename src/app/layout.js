@@ -9,6 +9,7 @@ import { GlobalProvider } from "@/context/globalContext";
 
 import { VideoProvider } from "@/context/VideoContext";
 import { TakesProvider } from "@/context/hotTakeContext";
+import { PlaylistProvider } from "@/context/Playlist.Context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,6 +55,8 @@ export default function RootLayout({ children }) {
               <UserProvider>
                 <VideoProvider>
                   <TakesProvider>
+                    <PlaylistProvider>
+
 
 
 
@@ -71,6 +74,7 @@ export default function RootLayout({ children }) {
                   </main>
                 </div>
                 
+                    </PlaylistProvider>
                   </TakesProvider>
                 </VideoProvider>
               </UserProvider>

@@ -49,7 +49,7 @@ dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[
           
         </div>
 
-        {/* Info */}
+  
         <div className="flex-1 flex flex-col gap-2">
           <h1 className="bg-transparent text-xl w-fit text-center text-[#23235b] dark:text-white rounded px-3 py-1 mb-2 italic tracking-wider ">
             {profile?.username}

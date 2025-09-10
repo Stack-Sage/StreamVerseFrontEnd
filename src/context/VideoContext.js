@@ -12,6 +12,7 @@ export const VideoProvider = ({ children }) => {
  
   const [allVideos, setAllVideos] = useState([]);
   const [comments,setComments] = useState([])
+
   const [currentVideo,setCurrentVideo] = useState(null)
   const [videoLike,setVideoLike] = useState(null)
   const [commentLike,setCommentLike] = useState(null)

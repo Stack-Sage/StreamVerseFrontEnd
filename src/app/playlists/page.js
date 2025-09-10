@@ -1,7 +1,11 @@
+import ShowPlaylist from "@/components/Playlist/ShowPlaylist";
+
 export default function PlaylistsPage() {
   return (
     <main>
-      Playlists List Page
+      
+      <ShowPlaylist/>
+
     </main>
   );
 }
