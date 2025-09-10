@@ -5,10 +5,13 @@ import { useState } from "react";
 
 
 export default function ContactSection() {
+
   const [submitted, setSubmitted] = useState(false);
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
+
   };
   return (
     <div className="w-full max-w-2xl mb-10 space-y-2">

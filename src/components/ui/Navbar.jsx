@@ -27,9 +27,9 @@ const navLinks = [
   { href: "/videos", label: "Videos", icon: <FaVideo /> },
   { href: "/hot-takes", label: "Hot Takes", icon: <FaFire /> },
   { href: "/dashboard", label: "Dashboard", icon: <FaThLarge /> },
-  { href: "/playlists", label: "Playlists", icon: <FaListUl /> },
-  { href: "/subscriptions", label: "Subscriptions", icon: <MdSubscriptions /> },
-  { href: "/settings", label: "Settings", icon: <FaStream /> },
+  // { href: "/playlists", label: "Playlists", icon: <FaListUl /> },
+  // { href: "/subscriptions", label: "Subscriptions", icon: <MdSubscriptions /> },
+  // { href: "/settings", label: "Settings", icon: <FaStream /> },
 ];
 
 
@@ -61,7 +61,7 @@ export default function Navbar() {
  
       <div
         onMouseOver={() => setCollapsed(false)}
-        onMouseOut={() => setCollapsed(true)}
+        onMouseOut={() => setCollapsed(false)}
         className={`hidden md:flex absolute top-0 left-0 h-screen
           flex-col justify-between z-50
           backdrop-blur-xl shadow-black/30 dark:border-white/10 shadow-xl dark:shadow-blue-800/50

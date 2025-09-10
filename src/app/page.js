@@ -1,12 +1,12 @@
 import Link from "next/link";
 import SpringWrapper from "@/utils/SpringWrapper";
 import HeroSection from "@/components/Home/HeroSection";
-import FeaturesSection from "@/components/Home/FeaturesSection";
+
 import TechStackSection from "@/components/Home/TechStackSection";
 import ExploreSection from "@/components/Home/ExploreSection";
 import HowItWorksSection from "@/components/Home/HowItWorksSection";
 import FAQSection from "@/components/Home/FAQSection";
-import TestimonialsSection from "@/components/Home/TestimonialsSection";
+
 import RecentUpdatesSection from "@/components/Home/RecentUpdatesSection";
 import ContactSection from "@/components/Home/ContactSection";
 import MeetTheTeamSection from "@/components/Home/MeetTheTeamSection";
@@ -16,23 +16,21 @@ export default function Page() {
   return (
     <main className="min-h-screen w-full flex flex-col items-center justify-center px-4 pt-20 pb-16 bg-transparent transition-colors duration-300">
       <HeroSection />
-      <FeaturesSection />
+     
       <TechStackSection />
       <ExploreSection />
       <HowItWorksSection />
       <FAQSection />
-      <TestimonialsSection />
-      <RecentUpdatesSection />
-      <ContactSection />
-      <MeetTheTeamSection />
+
+  
       <SkillsCarouselSection />
 
-      {/* Documentation & Source Section */}
+    
       <SpringWrapper delay={900} className="w-full max-w-2xl mb-10 space-y-2">
         <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
           Documentation & Source
         </h2>
-        <div className="flex flex-wrap gap-4 justify-center">
+        <div className="flex flex-wrap gap-4 mt-4 justify-center">
           <SpringWrapper className="transition-transform duration-200 hover:scale-105">
             <Link
               href="https://github.com/Stack-Sage/StreamVerseFrontEnd"
@@ -45,7 +43,7 @@ export default function Page() {
           </SpringWrapper>
           <SpringWrapper className="transition-transform duration-200 hover:scale-105">
             <Link
-              href="https://github.com/Stack-Sage/StreamVerseBackEnd"
+              href="https://github.com/Stack-Sage/MERN-Project-"
               target="_blank"
               rel="noopener"
               className="px-5 py-2 rounded-lg bg-neutral-800 text-white font-semibold hover:bg-neutral-700 transition"
@@ -56,7 +54,6 @@ export default function Page() {
         </div>
       </SpringWrapper>
 
-      {/* About the Developer Section */}
       <SpringWrapper
         delay={1100}
         className="w-full max-w-2xl mb-10 space-y-2 text-center"
@@ -65,7 +62,7 @@ export default function Page() {
           About the Developer
         </h2>
         <p className="mb-2 text-neutral-700 dark:text-neutral-300">
-          Built by <span className="font-bold">Stack-Sage</span>
+          Built by <span className="font-bold">Adarsh Pathania </span>
         </p>
         <div className="flex gap-4 justify-center">
           <SpringWrapper className="transition-transform duration-200 hover:scale-110">
@@ -80,12 +77,22 @@ export default function Page() {
           </SpringWrapper>
           <SpringWrapper className="transition-transform duration-200 hover:scale-110">
             <Link
-              href="https://twitter.com/StackSage"
+              href="https://www.linkedin.com/in/adarsh-pathania177/"
               target="_blank"
               rel="noopener"
               className="underline text-blue-600 dark:text-blue-400"
             >
-              Twitter
+              Linkedin
+            </Link>
+          </SpringWrapper>
+          <SpringWrapper className="transition-transform duration-200 hover:scale-110">
+            <Link
+              href="https://adarsh-dev11.onrender.com/"
+              target="_blank"
+              rel="noopener"
+              className="underline text-blue-600 dark:text-blue-400"
+            >
+              Personal Portfolio
             </Link>
           </SpringWrapper>
         </div>
@@ -128,41 +135,9 @@ export default function Page() {
         </ol>
       </SpringWrapper>
 
-      {/* FAQ Section */}
-      <SpringWrapper delay={1500} className="w-full max-w-2xl mb-10 space-y-2">
-        <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
-          FAQ
-        </h2>
-        <div className="space-y-4">
-          <SpringWrapper className="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg shadow transition-transform duration-200 hover:scale-105">
-            <span className="font-bold">Is StreamVerse free?</span>
-            <p>Yes, StreamVerse is free for all users.</p>
-          </SpringWrapper>
-          <SpringWrapper className="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg shadow transition-transform duration-200 hover:scale-105">
-            <span className="font-bold">Can I upload any type of video?</span>
-            <p>As long as it follows our community guidelines.</p>
-          </SpringWrapper>
-          <SpringWrapper className="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg shadow transition-transform duration-200 hover:scale-105">
-            <span className="font-bold">How do I create a playlist?</span>
-            <p>Go to Playlists and click Create Playlist.</p>
-          </SpringWrapper>
-        </div>
-      </SpringWrapper>
+     
 
-      {/* Call to Action Section */}
-      <SpringWrapper
-        delay={1700}
-        className="w-full max-w-2xl mb-10 flex justify-center"
-      >
-        <SpringWrapper className="transition-transform duration-200 hover:scale-105">
-          <Link
-            href="/register"
-            className="px-8 py-3 rounded-xl bg-blue-600 text-white font-bold text-lg shadow-lg hover:bg-blue-700 transition"
-          >
-            Get Started
-          </Link>
-        </SpringWrapper>
-      </SpringWrapper>
+     
 
       {/* Footer */}
       <footer className="w-full max-w-2xl mx-auto text-center py-6 text-neutral-500 dark:text-neutral-400 border-t border-neutral-200 dark:border-neutral-800 mt-8">
