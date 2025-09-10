@@ -270,79 +270,8 @@ dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[
           )}
         </div>
 
-        <div
-          className="bg-gradient-to-br from-indigo-300/40 via-blue-200/30 to-indigo-100/40 
-dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70 rounded-2xl  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30 shadow p-6"
-        >
-          <h3 className="font-bold text-lg mb-4 text-[#23235b] dark:text-white">
-            {" "}
-            Settings
-          </h3>
-          <div className="mb-2 font-semibold text-[#23235b] dark:text-white">
-            Account
-          </div>
-          <div className="flex flex-col gap-2 mb-4">
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={settings.emailFollow}
-                onChange={() => handleToggle("emailFollow")}
-                className="accent-[#7b2ff2]"
-              />
-              Email me when someone follows me
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={settings.emailAnswer}
-                onChange={() => handleToggle("emailAnswer")}
-                className="accent-[#7b2ff2]"
-              />
-              Email me when someone answers on my post
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={settings.emailMention}
-                onChange={() => handleToggle("emailMention")}
-                className="accent-[#7b2ff2]"
-              />
-              Email me when someone mentions me
-            </label>
-          </div>
-          <div className="mb-2 font-semibold text-[#23235b] dark:text-white">
-            Application
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={settings.launches}
-                onChange={() => handleToggle("launches")}
-                className="accent-[#7b2ff2]"
-              />
-              New launches and projects
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={settings.updates}
-                onChange={() => handleToggle("updates")}
-                className="accent-[#7b2ff2]"
-              />
-              Monthly product updates
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={settings.newsletter}
-                onChange={() => handleToggle("newsletter")}
-                className="accent-[#7b2ff2]"
-              />
-              Subscribe to newsletter
-            </label>
-          </div>
-        </div>
+        
+      
       </div>
     </div>
   );

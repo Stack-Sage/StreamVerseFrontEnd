@@ -20,14 +20,14 @@
 .dynamic-gradient {
   background: linear-gradient(
     -45deg,
-    #d8c0ff,
+    #f7f3ff,
     #efecff,
-    #b9d7ff,
-    #ebf8ff,
-    #ffd2ec,
-    #ffeefa,
-    #b8c6ff,
-    #f3ffee
+    #efd6ff,
+    #e4f6ff,
+    #f3deff,
+    #e7efff,
+    #f1f4ff,
+    #d6deff
   );
   background-size: 600% 600%; /* smoother because bigger */
   animation: gradient-shift 18s ease infinite; /* slowed for fluid feel */
