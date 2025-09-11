@@ -14,7 +14,6 @@ const VideoUploadForm = () => {
     e.preventDefault()
     const formData = new FormData(e.target)
     try {
-
       showInfo("Uploading video...")
       setIsLoading(true)
       setStatus('Uploading...')
@@ -43,24 +42,24 @@ const VideoUploadForm = () => {
 
   return (
     <div>
- 
       <button
         onClick={() => setIsOpen(true)}
-        className="px-4 py-2  bg-black text-white rounded-md hover:bg-neutral-800 transition flex items-center gap-2"
+        className="px-4 py-2 bg-black text-white rounded-md hover:bg-neutral-800 transition flex items-center gap-2"
       >
         <FaUpload /> Create Video
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 flex px-4 items-center justify-center z-50">
-         
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          
+          {/* Background blur */}
           <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/40 backdrop-blur-md"
             onClick={() => setIsOpen(false)}
           ></div>
 
-          <div className="relative bg-neutral-900 text-white p-6 rounded-2xl shadow-xl w-full max-w-lg z-10">
-           
+          {/* Centered modal */}
+          <div className="relative bg-neutral-900 text-white p-6 rounded-2xl shadow-2xl w-full max-w-lg z-10 animate-fadeIn">
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-3 right-3 text-gray-400 hover:text-white"
@@ -74,14 +73,14 @@ const VideoUploadForm = () => {
 
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <input
-              required
+                required
                 type="text"
                 name="title"
                 placeholder="Title"
                 className="p-2 rounded-md bg-neutral-800 border border-neutral-700 focus:outline-none focus:border-white text-white placeholder-gray-400"
               />
               <textarea
-              required
+                required
                 name="description"
                 placeholder="Description"
                 className="p-2 rounded-md bg-neutral-800 border border-neutral-700 focus:outline-none focus:border-white text-white placeholder-gray-400"
@@ -90,25 +89,30 @@ const VideoUploadForm = () => {
               <div className="flex flex-col gap-2">
                 <label className="text-sm text-gray-300">Thumbnail</label>
                 <input
-                required
+                  required
                   type="file"
                   name="thumbnail"
                   accept="image/*"
                   onChange={handleThumbnailChange}
-                  className="p-2 rounded-md bg-neutral-800 border border-neutral-700 focus:outline-none focus:border-white text-white file:mr-4 file:rounded-md file:border-0 file:bg-neutral-700 file:text-white hover:file:bg-neutral-600"
+                  className="p-2 rounded-md bg-neutral-800 border border-neutral-700 text-white file:mr-4 file:rounded-md file:border-0 file:bg-neutral-700 file:text-white hover:file:bg-neutral-600"
                 />
-               
+                {thumbnailPreview && (
+                  <img
+                    src={thumbnailPreview}
+                    alt="Thumbnail Preview"
+                    className="mt-2 w-40 h-24 object-cover rounded-md border border-neutral-700"
+                  />
+                )}
               </div>
 
-        
               <div className="flex flex-col gap-2">
                 <label className="text-sm text-gray-300">Video</label>
                 <input
-                required
+                  required
                   type="file"
                   name="videoFile"
                   accept="video/*"
-                  className="p-2 rounded-md bg-neutral-800 border border-neutral-700 focus:outline-none focus:border-white text-white file:mr-4 file:rounded-md file:border-0 file:bg-neutral-700 file:text-white hover:file:bg-neutral-600"
+                  className="p-2 rounded-md bg-neutral-800 border border-neutral-700 text-white file:mr-4 file:rounded-md file:border-0 file:bg-neutral-700 file:text-white hover:file:bg-neutral-600"
                 />
               </div>
 
@@ -118,7 +122,9 @@ const VideoUploadForm = () => {
               >
                 {status}
               </button>
-              {isLoading && <p className="text-center text-blue-400">{showInfo("Uploading...")}</p>}
+              {isLoading && (
+                <p className="text-center text-blue-400">Uploading...</p>
+              )}
             </form>
           </div>
         </div>
