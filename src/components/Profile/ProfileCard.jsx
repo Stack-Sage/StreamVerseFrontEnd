@@ -185,7 +185,8 @@ dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[
         </div>
       </div>
 
-      <div className=" lg:min-w-4xl max-w-4xl  mx-auto mt-8 opacity-80 grid grid-cols-1  md:grid-cols-2 gap-6">
+      <div className="max-w-4xl lg:min-w-4xl mx-auto mt-8 opacity-90">
+
         <div
           className="bg-gradient-to-br from-indigo-300/40 via-blue-200/30 to-indigo-100/40 
 dark:from-indigo-900/60 dark:via-blue-950/40 dark:to-slate-900/70  hover:scale-[1.01] duration-300 transition-all ease-out hover:contrast-125 hover:via-blue-300/50 hover:dark:via-black/30  rounded-2xl shadow p-6"

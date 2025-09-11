@@ -109,7 +109,7 @@ export default function VideoPlayerPage() {
           src={currentVideo.videoFile}
           controls
           className="rounded-lg w-full h-[20em] sm:h-[25em] md:h-[30em] lg:h-[40em] object-cover"
-          autoPlay={false}
+          autoPlay={true}
           preload="auto"
           muted={false}
         />
