@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import SpringWrapper from "@/utils/SpringWrapper";
 import HeroSection from "@/components/Home/HeroSection";

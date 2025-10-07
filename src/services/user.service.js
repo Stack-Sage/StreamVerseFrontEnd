@@ -3,6 +3,16 @@ import axios from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+const okayApi = async()=>{
+  try {
+    const response = await axios.get(`${BASE_URL}/users/okay`)
+    console.log(response , "this is okay api response")
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}
+
 const registerUserApi = async (userData) => {
   try {
     const response = await axios.post(
@@ -162,5 +172,6 @@ export {
   logoutUserApi,
   changePasswordApi,
   getCurrentUserApi,
-  getUserChannelProfileApi
+  getUserChannelProfileApi,
+  okayApi
 };
